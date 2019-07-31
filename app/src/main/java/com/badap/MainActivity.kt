@@ -1,6 +1,7 @@
 package com.badap
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +9,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.edit
 import com.badap.fragments.ArtistsFragment
+import com.badap.utilities.HelperMethods
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg
 import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException
@@ -23,6 +26,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setupPermissions()
         initializeFfmpeg()
+
+        val prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE)
+        val helperMethods = HelperMethods()
+        val screenSize = helperMethods.getScreenSize(this)
+
+        if (!prefs.contains("screen_width") || !prefs.contains("screen_height")) {
+            prefs.edit {
+                putInt("screen_width", screenSize.x)
+                putInt("screen_height", screenSize.y)
+            }
+        }
 
         val artistFragment = ArtistsFragment()
         supportFragmentManager.beginTransaction().replace(R.id.main_container, artistFragment).commit()

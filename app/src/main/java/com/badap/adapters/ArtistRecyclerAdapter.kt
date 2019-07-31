@@ -3,7 +3,6 @@ package com.badap.adapters
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.badap.adapters.viewHolders.*
@@ -15,7 +14,7 @@ class ArtistRecyclerAdapter(
     private val artistList: ArrayList<Artist>,
     private val activity: FragmentActivity,
     private val screenWidth: Int,
-    initialViewType: Int
+    private var currentViewType: Int
 ) : ListAdapter<Artist, RecyclerView.ViewHolder>(ListItemCallback()) {
 
     class ListItemCallback : DiffUtil.ItemCallback<Artist>() {
@@ -28,25 +27,19 @@ class ArtistRecyclerAdapter(
         }
     }
 
-    private var viewType = 6
-
-    init {
-        this.viewType = initialViewType
-    }
-
     private val helper: HelperMethods = HelperMethods()
 
     enum class ViewType {
-        SMALL_GRID,
-        SMALL_ROW,
-        MEDIUM_GRID,
-        MEDIUM_ROW,
         LARGE_GRID,
-        LARGE_ROW
+        LARGE_ROW,
+        MEDIUM_ROW,
+        MEDIUM_GRID,
+        SMALL_GRID,
+        SMALL_ROW
     }
 
     fun setViewType(newViewType: Int) {
-        this.viewType = newViewType
+        this.currentViewType = newViewType
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -94,7 +87,7 @@ class ArtistRecyclerAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (viewType) {
+        return when (currentViewType) {
             1 -> ViewType.LARGE_GRID.ordinal
             2 -> ViewType.LARGE_ROW.ordinal
             3 -> ViewType.MEDIUM_ROW.ordinal
@@ -120,6 +113,5 @@ class ArtistRecyclerAdapter(
                 holder.bindViewHolder(artist)
             }
         }
-
     }
 }

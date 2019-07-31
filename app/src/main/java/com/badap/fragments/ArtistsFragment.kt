@@ -11,12 +11,16 @@ import android.widget.Button
 import androidx.core.content.edit
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.badap.Artist
 import com.badap.adapters.ArtistRecyclerAdapter
 import com.badap.R
-import com.badap.utilities.HelperMethods
 import com.badap.utilities.MediaStoreHelper
 
 class ArtistsFragment : Fragment() {
+
+    companion object ArtistList{
+        var companionArtistList: ArrayList<Artist>? = null
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,56 +33,62 @@ class ArtistsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val mediaHelper = MediaStoreHelper()
-        val helperMethods = HelperMethods()
 
-        val layoutManager = GridLayoutManager(requireContext(), 1)
+        val layoutManager = GridLayoutManager(requireContext(), 12)
         val recyclerView = view.findViewById<RecyclerView>(R.id.artists_recycler)
         val scaleUpButton: Button = view.findViewById(R.id.scaleUpButton)
         val scaleDownButton: Button = view.findViewById(R.id.scaleDownButton)
 
-        val preferences = requireActivity().getSharedPreferences("zoom_level", Context.MODE_PRIVATE)
-        val initialViewMode = preferences.getInt("columnCount", 6)
-        val adapter = ArtistRecyclerAdapter(mediaHelper.getAllArtists(requireContext()), requireActivity(), helperMethods.getScreenSize(requireActivity()).x, initialViewMode)
+        val preferences = requireActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE)
+        val initialViewMode = preferences.getInt("view_mode", 2)
+        val screenWidth = preferences.getInt("screen_width", -1)
+
+        val adapter: ArtistRecyclerAdapter?
 
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = adapter
+        if (companionArtistList.isNullOrEmpty()) {
+            companionArtistList = mediaHelper.getAllArtists(requireContext())
+            adapter = ArtistRecyclerAdapter(companionArtistList!!, requireActivity(), screenWidth, initialViewMode)
+            recyclerView.adapter = adapter
+        } else {
+            adapter = ArtistRecyclerAdapter(companionArtistList!!, requireActivity(), screenWidth, initialViewMode)
+            recyclerView.adapter = adapter
+        }
 
-//        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-//            override fun getSpanSize(position: Int): Int {
-//                return when(adapter.getItemViewType(position)) {
-//                    5 -> 1 // large grid
-//                    6 -> 2 // large row
-////                    3 -> 1 // medium row
-////                    4 -> 3 // medium grid
-////                    5 -> 4 // small grid
-////                    else -> 1 // small row
-//                    else -> 2
-//                }
-//            }
-//        }
-
-        scaleDownButton.setOnClickListener {
-            val currentViewMode = preferences.getInt("columnCount", 1)
-            if (currentViewMode > 1) {
-                val newViewMode = currentViewMode - 1
-                adapter.setViewType(newViewMode)
-                preferences.edit { putInt("columnCount", newViewMode) }
-                adapter.notifyItemRangeChanged(0, adapter.itemCount)
+        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return when(adapter.getItemViewType(position)) {
+                    0 -> 6 // large grid
+                    1 -> 12 // large row
+                    2 -> 12 // medium row
+                    3 -> 4 // medium grid
+                    4 -> 3 // small grid
+                    5 -> 12 // small row
+                    else -> -1
+                }
             }
-//            adapter.setViewType(6)
-//            adapter.notifyItemRangeChanged(0, adapter.itemCount)
         }
 
         scaleUpButton.setOnClickListener {
-            val currentViewMode = preferences.getInt("columnCount", 1)
+            val currentViewMode = preferences.getInt("view_mode", 1)
+            if (currentViewMode > 1) {
+                val newViewMode = currentViewMode - 1
+                adapter.setViewType(newViewMode)
+                println("NEW MODE: $newViewMode")
+                preferences.edit { putInt("view_mode", newViewMode) }
+                adapter.notifyItemRangeChanged(0, adapter.itemCount)
+            }
+        }
+
+        scaleDownButton.setOnClickListener {
+            val currentViewMode = preferences.getInt("view_mode", 1)
             if (currentViewMode < 6) {
                 val newViewMode = currentViewMode + 1
                 adapter.setViewType(newViewMode)
-                preferences.edit { putInt("columnCount", newViewMode) }
+                println("NEW MODE: $newViewMode")
+                preferences.edit { putInt("view_mode", newViewMode) }
                 adapter.notifyItemRangeChanged(0, adapter.itemCount)
             }
-//            adapter.setViewType(5)
-//            adapter.notifyItemRangeChanged(0, adapter.itemCount)
         }
 
 

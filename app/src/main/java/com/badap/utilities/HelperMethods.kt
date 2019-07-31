@@ -1,5 +1,6 @@
 package com.badap.utilities
 
+import android.app.Activity
 import android.graphics.Point
 import android.net.Uri
 import android.os.Bundle
@@ -89,7 +90,7 @@ class HelperMethods {
         return spannable
     }
 
-    fun getScreenSize(activity: FragmentActivity) : Point {
+    fun getScreenSize(activity: Activity) : Point {
         val display = activity.windowManager.defaultDisplay
         val size = Point()
         display.getSize(size)

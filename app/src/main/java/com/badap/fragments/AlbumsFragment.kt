@@ -42,19 +42,19 @@ class AlbumsFragment : Fragment() {
         val mediaHelper = MediaStoreHelper()
         val albumList = mediaHelper.getAllAlbumsForArtist(requireContext(), artistId)
 
-        val helperMethods = HelperMethods()
         val activity = requireActivity()
 
-        val preferences = requireContext().getSharedPreferences("zoom_level", Context.MODE_PRIVATE)
+        val preferences = requireContext().getSharedPreferences("prefs", Context.MODE_PRIVATE)
         val editor = preferences?.edit()
-        val currentViewMode = preferences.getInt("columnCount", 1)
+        val currentViewMode = preferences.getInt("view_mode", 1)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.albums_recycler)
 
         val currentLayoutManager = getLayoutManager(currentViewMode)
         recyclerView.layoutManager = currentLayoutManager
 
-        val adapter = AlbumRecyclerAdapter(albumList, activity, helperMethods.getScreenSize(activity).x)
+        val screenWidth = preferences.getInt("screen_width", -1)
+        val adapter = AlbumRecyclerAdapter(albumList, activity, screenWidth)
         adapter.setSpan(currentViewMode)
 
         recyclerView.adapter = adapter
@@ -63,7 +63,7 @@ class AlbumsFragment : Fragment() {
             override fun onScale(detector: ScaleGestureDetector?): Boolean {
                 super.onScale(detector)
 
-                var viewMode = preferences.getInt("columnCount", 1)
+                var viewMode = preferences.getInt("view_mode", 1)
 
                 detector?.let {
                     if (it.currentSpan > 200 && it.timeDelta > 200) {
@@ -72,7 +72,7 @@ class AlbumsFragment : Fragment() {
                                 viewMode++
                                 recyclerView.layoutManager = getLayoutManager(viewMode)
                                 adapter.setSpan(viewMode)
-                                editor?.putInt("columnCount", viewMode)?.apply()
+                                editor?.putInt("view_mode", viewMode)?.apply()
                                 return true
                             }
                         }
@@ -81,7 +81,7 @@ class AlbumsFragment : Fragment() {
                                 viewMode--
                                 recyclerView.layoutManager = getLayoutManager(viewMode)
                                 adapter.setSpan(viewMode)
-                                editor?.putInt("columnCount", viewMode)?.apply()
+                                editor?.putInt("view_mode", viewMode)?.apply()
                                 return true
                             }
                         }
