@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Badap</string>
+    <string name="bottom_navigator_music">Music</string>
+    <string name="bottom_navigator_friends">Friends</string>
+    <string name="bottom_navigator_profile">Profile</string>
+    <string name="bottom_navigator_search">Search</string>
+
+</resources>
