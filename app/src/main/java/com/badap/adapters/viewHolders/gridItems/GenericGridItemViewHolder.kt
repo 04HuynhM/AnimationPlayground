@@ -8,14 +8,13 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.badap.Album
+import com.badap.MainActivity.Companion.generalUtil
 import com.badap.R
 import com.badap.Song
-import com.badap.utilities.HelperMethods
 
 class GenericGridItemViewHolder(view: View,
                                 private var activity: FragmentActivity,
-                                private var width: Int,
-                                private var image: Uri?)
+                                private var width: Int)
     : RecyclerView.ViewHolder(view), View.OnClickListener {
     private var data: Any? = null
     private var mTitleView : TextView? = null
@@ -23,7 +22,6 @@ class GenericGridItemViewHolder(view: View,
     private var mImageView: ImageView? = null
     private var mContainer: ConstraintLayout? = null
 
-    val helper = HelperMethods()
 
     init {
         mTitleView = view.findViewById(R.id.generic_grid_item_name)
@@ -36,10 +34,10 @@ class GenericGridItemViewHolder(view: View,
     override fun onClick(p0: View?) {
         when(val data = this.data) {
             is Album -> {
-                helper.goToAlbumSongsFragment(data, activity)
+                generalUtil.goToAlbumSongsFragment(data, activity)
             }
             is Song -> {
-                helper.goToSongFragment(data, activity)
+                generalUtil.goToSongFragment(data, activity)
             }
         }
     }
@@ -49,21 +47,21 @@ class GenericGridItemViewHolder(view: View,
         this.data = data
         when(data) {
             is Album -> {
-                val spannableName = helper.setSpannableString(data.albumName, colorId)
-                val spannableArtist = helper.setSpannableString(data.artist, colorId)
+                val spannableName = generalUtil.setSpannableString(data.albumName, colorId)
+                val spannableArtist = generalUtil.setSpannableString(data.artist, colorId)
                 mDetailView?.text = spannableArtist
                 mTitleView?.text = spannableName
                 mImageView?.let {
-                    helper.insertImageFromUri(Uri.parse(data.albumArt), mImageView!!, activity, width)
+                    generalUtil.insertImageFromUri(Uri.parse(data.albumArt), mImageView!!, activity, width)
                 }
             }
             is Song -> {
-                val spannableName = helper.setSpannableString(data.title, colorId)
-                val spannableAlbum = helper.setSpannableString(data.album, colorId)
+                val spannableName = generalUtil.setSpannableString(data.title, colorId)
+                val spannableAlbum = generalUtil.setSpannableString(data.album, colorId)
                 mDetailView?.text = spannableAlbum
                 mTitleView?.text = spannableName
                 mImageView?.let {
-                    helper.insertImageFromUri(image, mImageView!!, activity, width)
+                    generalUtil.insertImageFromUri(Uri.parse(data.albumArtUri), mImageView!!, activity, width)
                 }
             }
         }

@@ -3,16 +3,17 @@ package com.badap.fragments.albums
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.badap.Album
 import com.badap.MainActivity
-import com.badap.adapters.AlbumRecyclerAdapter
 import com.badap.R
-import com.badap.utilities.MediaStoreHelper
+import com.badap.adapters.AlbumRecyclerAdapter
 
 
 class AllAlbumsFragment : Fragment() {
@@ -64,6 +65,10 @@ class AllAlbumsFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.update_library_index -> {
+                val activity = requireActivity() as MainActivity
+                activity.initializeLibraryArrays()
+            }
             R.id.large_grid_option -> {
                 setViewType(1)
             }

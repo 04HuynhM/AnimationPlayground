@@ -1,8 +1,6 @@
 package com.badap.utilities
 
 import android.app.Activity
-import android.app.ActivityManager
-import android.content.Context
 import android.graphics.Point
 import android.net.Uri
 import android.os.Bundle
@@ -11,8 +9,6 @@ import android.text.style.BackgroundColorSpan
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.app.ActivityCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.badap.*
 import com.badap.fragments.albums.AlbumsFragment
@@ -22,7 +18,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
-class HelperMethods {
+class GeneralUtility {
     fun goToAlbumSongsFragment(album: Album?, context: FragmentActivity?) {
         val singleAlbumFragment = AlbumSongsFragment()
         val bundle = Bundle()

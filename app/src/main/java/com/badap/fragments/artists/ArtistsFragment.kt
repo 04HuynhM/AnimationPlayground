@@ -64,6 +64,10 @@ class ArtistsFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.update_library_index -> {
+                val activity = requireActivity() as MainActivity
+                activity.initializeLibraryArrays()
+            }
             R.id.large_grid_option -> {
                 setViewType(1)
             }

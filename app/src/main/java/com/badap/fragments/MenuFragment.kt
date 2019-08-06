@@ -5,9 +5,11 @@ import android.view.*
 import android.widget.Button
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
+import com.badap.MainActivity
 import com.badap.R
 import com.badap.fragments.albums.AllAlbumsFragment
 import com.badap.fragments.artists.ArtistsFragment
+import com.badap.fragments.songs.AllSongsFragment
 
 class MenuFragment : Fragment() {
 
@@ -31,8 +33,9 @@ class MenuFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.button_viewmode_option -> {
-                return false
+            R.id.update_library_index_main -> {
+                val activity = requireActivity() as MainActivity
+                activity.initializeLibraryArrays()
             }
             R.id.button_viewmode_option_main -> {
                 if (container.currentState == container.startState) {
@@ -65,7 +68,7 @@ class MenuFragment : Fragment() {
         }
 
         allSongsButton.setOnClickListener {
-
+            loadFragment(AllSongsFragment())
         }
 
         settingsButton.setOnClickListener {

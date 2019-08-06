@@ -5,7 +5,7 @@
         android:id="@+id/button_viewmode_option"
         android:icon="@drawable/ic_view_module_white_24dp"
         android:title=""
-        app:showAsAction="always">
+        app:showAsAction="ifRoom">
         <menu>
             <item
                 android:id="@+id/large_grid_option"
@@ -31,6 +31,17 @@
                 android:id="@+id/small_row_option"
                 android:icon="@drawable/ic_view_list_grey_24dp"
                 android:title="Small row" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/button_options_menu"
+        android:icon="@drawable/ic_more_vert_white_24dp"
+        android:title=""
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/update_library_index"
+                android:title="Rescan library" />
         </menu>
     </item>
 </menu>

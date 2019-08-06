@@ -13,8 +13,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import com.badap.fragments.MenuFragment
-import com.badap.utilities.HelperMethods
-import com.badap.utilities.MediaStoreHelper
+import com.badap.utilities.GeneralUtility
+import com.badap.utilities.MediaStoreUtility
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg
 import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException
@@ -28,7 +28,10 @@ class MainActivity : AppCompatActivity() {
     companion object {
         var indexedArtists: ArrayList<Artist>? = null
         var indexedAlbums: ArrayList<Album>? = null
+        var indexedSongs: ArrayList<Song>? = null
         var lastUpdated: Date? = null
+        val mediaStoreUtil = MediaStoreUtility()
+        val generalUtil = GeneralUtility()
     }
 
     private val PERMISSIONS_REQUEST_CODE = 101
@@ -43,8 +46,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         val prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE)
-        val helperMethods = HelperMethods()
-        val screenSize = helperMethods.getScreenSize(this)
+        val screenSize = generalUtil.getScreenSize(this)
 
         if (!prefs.contains("screen_width") || !prefs.contains("screen_height")) {
             prefs.edit {
@@ -64,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         val fos = FileOutputStream(filePath)
         val oos = ObjectOutputStream(fos)
 
-        val dataArray = arrayOf(indexedArtists, indexedAlbums)
+        val dataArray = arrayOf(indexedArtists, indexedAlbums, indexedSongs)
         oos.writeObject(dataArray)
     }
 
@@ -72,22 +74,23 @@ class MainActivity : AppCompatActivity() {
         val dataFile = getCachedDirectory()
 
         if (dataFile.exists()) {
-
             val fis = FileInputStream(dataFile)
             val ois = ObjectInputStream(fis)
 
             val dataArray = ois.readObject() as Array<ArrayList<*>>
             indexedArtists = dataArray[0] as ArrayList<Artist>
             indexedAlbums = dataArray[1] as ArrayList<Album>
+            indexedSongs = dataArray[2] as ArrayList<Song>
         } else {
             initializeLibraryArrays()
         }
     }
 
-    private fun initializeLibraryArrays() {
-        val mediaHelper = MediaStoreHelper()
+    fun initializeLibraryArrays() {
+        val mediaHelper = MediaStoreUtility()
         indexedAlbums = mediaHelper.getAllAlbums(this)
         indexedArtists = mediaHelper.getAllArtists(this)
+        indexedSongs = mediaHelper.getAllSongs(this)
         lastUpdated = Date()
 
         cacheCurrentLibrary()

@@ -9,14 +9,14 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.badap.MainActivity
+import com.badap.MainActivity.Companion.mediaStoreUtil
 import com.badap.R
 import com.badap.adapters.SongRecyclerAdapter
-import com.badap.utilities.MediaStoreHelper
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -47,8 +47,7 @@ class AlbumSongsFragment : Fragment() {
         val albumArtImageView = view.findViewById<ImageView>(R.id.single_album_art)
         val recyclerView = view.findViewById<RecyclerView>(R.id.single_album_song_recycler)
 
-        val mediaHelper = MediaStoreHelper()
-        val songList = mediaHelper.getAllSongsForAlbum(requireContext(), albumId)
+        val songList = mediaStoreUtil.getAllSongsForAlbum(requireContext(), albumId)
 
         prefs = requireActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE)
         val initialViewType = prefs.getInt("view_mode", 1)
@@ -57,7 +56,7 @@ class AlbumSongsFragment : Fragment() {
         val layoutManager = GridLayoutManager(requireContext(), 12)
         recyclerView.layoutManager = layoutManager
 
-        adapter = SongRecyclerAdapter(songList, requireActivity(), albumArtUri, screenWidth, initialViewType)
+        adapter = SongRecyclerAdapter(songList, requireActivity(), screenWidth, initialViewType)
         recyclerView.adapter = adapter
 
         Glide.with(requireContext())
@@ -85,6 +84,10 @@ class AlbumSongsFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.update_library_index -> {
+                val activity = requireActivity() as MainActivity
+                activity.initializeLibraryArrays()
+            }
             R.id.large_grid_option -> {
                 setViewType(1)
             }

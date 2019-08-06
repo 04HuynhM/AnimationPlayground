@@ -20,9 +20,10 @@ data class Song(val songId: Long,
                 val title: String,
                 val trackNumber: String,
                 val album: String,
-                val albumId: String,
+                val albumId: Long,
                 val artist: String,
                 val artistId: String,
                 val path: String,
                 val duration: String,
-                val rawDuration: String) : Serializable
+                val rawDuration: String,
+                val albumArtUri: String?) : Serializable

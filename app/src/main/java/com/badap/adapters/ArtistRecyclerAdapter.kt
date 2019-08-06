@@ -6,18 +6,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.badap.Artist
+import com.badap.MainActivity.Companion.generalUtil
 import com.badap.R
 import com.badap.adapters.viewHolders.ArtistGridItem
 import com.badap.adapters.viewHolders.LargeArtistRow
 import com.badap.adapters.viewHolders.MediumArtistRow
 import com.badap.adapters.viewHolders.SmallArtistRow
-import com.badap.utilities.HelperMethods
 
-class ArtistRecyclerAdapter(
-    private val artistList: ArrayList<Artist>,
-    private val activity: FragmentActivity,
-    private val screenWidth: Int,
-    private var currentViewType: Int
+class ArtistRecyclerAdapter(private val artistList: ArrayList<Artist>,
+                            private val activity: FragmentActivity,
+                            private val screenWidth: Int,
+                            private var currentViewType: Int
 ) : ListAdapter<Artist, RecyclerView.ViewHolder>(ListItemCallback()) {
 
     class ListItemCallback : DiffUtil.ItemCallback<Artist>() {
@@ -30,7 +29,9 @@ class ArtistRecyclerAdapter(
         }
     }
 
-    private val helper: HelperMethods = HelperMethods()
+    fun setViewType(newViewType: Int) {
+        this.currentViewType = newViewType
+    }
 
     enum class ViewType {
         LARGE_GRID,
@@ -41,44 +42,40 @@ class ArtistRecyclerAdapter(
         SMALL_ROW
     }
 
-    fun setViewType(newViewType: Int) {
-        this.currentViewType = newViewType
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when (viewType) {
             ViewType.LARGE_GRID.ordinal -> {
-                val view = helper.getInflatedView(parent, R.layout.artist_grid_item)
+                val view = generalUtil.getInflatedView(parent, R.layout.artist_grid_item)
                 view.layoutParams.height = (screenWidth / 2) - 16
                 return ArtistGridItem(view, activity, (screenWidth / 2) - 16)
             }
             // Inflate layout for Medium Grid
             ViewType.MEDIUM_GRID.ordinal -> {
-                val view = helper.getInflatedView(parent, R.layout.artist_grid_item)
+                val view = generalUtil.getInflatedView(parent, R.layout.artist_grid_item)
                 view.layoutParams.height = (screenWidth / 3) - 16
                 return ArtistGridItem(view, activity, (screenWidth / 3) - 16)
             }
             // Inflate layout for Small Grid
             ViewType.SMALL_GRID.ordinal -> {
-                val view = helper.getInflatedView(parent, R.layout.artist_grid_item)
+                val view = generalUtil.getInflatedView(parent, R.layout.artist_grid_item)
                 view.layoutParams.height = (screenWidth / 4) - 16
                 return ArtistGridItem(view, activity, (screenWidth / 4) - 16)
             }
             // Inflate layout for Large Row
             ViewType.LARGE_ROW.ordinal -> {
-                val view = helper.getInflatedView(parent, R.layout.large_artist_item_row)
+                val view = generalUtil.getInflatedView(parent, R.layout.large_artist_item_row)
                 view.layoutParams.height = (screenWidth / 2) - 120
                 return LargeArtistRow(view, activity)
             }
             // Inflate layout for Medium Row
             ViewType.MEDIUM_ROW.ordinal -> {
-                val view = helper.getInflatedView(parent, R.layout.medium_artist_row)
+                val view = generalUtil.getInflatedView(parent, R.layout.medium_artist_row)
                 view.layoutParams.height = (screenWidth / 3) - 80
                 return MediumArtistRow(view, activity)
             }
             // Inflate layout for Small Row
             else -> {
-                val view = helper.getInflatedView(parent, R.layout.small_artist_row)
+                val view = generalUtil.getInflatedView(parent, R.layout.small_artist_row)
                 view.layoutParams.height = (screenWidth / 4) - 80
                 return SmallArtistRow(view, activity)
             }

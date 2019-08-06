@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.badap.Album
+import com.badap.MainActivity.Companion.generalUtil
 import com.badap.R
-import com.badap.utilities.HelperMethods
 
 class LargeAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHolder(v), View.OnClickListener {
     private var view: View = v
@@ -18,7 +18,6 @@ class LargeAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHold
     private var albumArtistTextView: TextView? = null
     private var albumImage: ImageView? = null
     var mContext = activity
-    private val helper = HelperMethods()
 
     init {
         nameViewTextView = view.findViewById(R.id.large_row_album_name)
@@ -29,7 +28,7 @@ class LargeAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHold
     }
 
     override fun onClick(p0: View?) {
-        helper.goToAlbumSongsFragment(album, mContext)
+        generalUtil.goToAlbumSongsFragment(album, mContext)
     }
 
     fun bindViewHolder(album: Album, width: Int) {
@@ -39,7 +38,7 @@ class LargeAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHold
         albumArtistTextView?.text = album.artist
         albumImage?.let {
             it.layoutParams.width = width
-            helper.insertImageFromUri(Uri.parse(album.albumArt), it, mContext, width)
+            generalUtil.insertImageFromUri(Uri.parse(album.albumArt), it, mContext, width)
         }
     }
 }
@@ -52,7 +51,6 @@ class MediumAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHol
     private var albumArtistTextView: TextView? = null
     var albumImage: ImageView? = null
     var mContext = activity
-    private val helper = HelperMethods()
 
     init {
         nameViewTextView = view.findViewById(R.id.medium_row_album_name)
@@ -63,7 +61,7 @@ class MediumAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHol
     }
 
     override fun onClick(p0: View?) {
-        helper.goToAlbumSongsFragment(album, mContext)
+        generalUtil.goToAlbumSongsFragment(album, mContext)
     }
 
     fun bindViewHolder(album: Album, width: Int) {
@@ -73,7 +71,7 @@ class MediumAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHol
         albumArtistTextView?.text = album.artist
         albumImage?.let {
             it.layoutParams.width = width
-            helper.insertImageFromUri(Uri.parse(album.albumArt), it, mContext, width)
+            generalUtil.insertImageFromUri(Uri.parse(album.albumArt), it, mContext, width)
         }
     }
 }
@@ -86,7 +84,6 @@ class SmallAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHold
     private var albumArtistTextView: TextView? = null
     var albumImage: ImageView? = null
     var mContext = activity
-    private val helper = HelperMethods()
 
     init {
         nameViewTextView = view.findViewById(R.id.small_row_album_name)
@@ -97,7 +94,7 @@ class SmallAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHold
     }
 
     override fun onClick(p0: View?) {
-        helper.goToAlbumSongsFragment(album, mContext)
+        generalUtil.goToAlbumSongsFragment(album, mContext)
     }
 
     fun bindViewHolder(album: Album, width: Int) {
@@ -107,7 +104,7 @@ class SmallAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHold
         albumArtistTextView?.text = album.artist
         albumImage?.let {
             it.layoutParams.width = width
-            helper.insertImageFromUri(Uri.parse(album.albumArt), it, mContext, width)
+            generalUtil.insertImageFromUri(Uri.parse(album.albumArt), it, mContext, width)
         }
     }
 }
