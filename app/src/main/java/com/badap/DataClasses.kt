@@ -9,13 +9,14 @@ data class Artist(val artistId: String,
                   val artistIdLong: Long,
                   val firstAlbumArt: Uri?)
 
-data class Album (val albumId: String,
+data class Album(val albumId: String,
                   val albumName: String,
                   val artist: String,
                   val numOfSongs: String,
-                  val albumArt: Uri)
+                  val albumArt: Uri?)
 
-data class Song(val name: String,
+data class Song(val songId: Long,
+                val name: String,
                 val title: String,
                 val trackNumber: String,
                 val album: String,

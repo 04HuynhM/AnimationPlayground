@@ -5,9 +5,12 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.badap.adapters.viewHolders.*
 import com.badap.Artist
 import com.badap.R
+import com.badap.adapters.viewHolders.ArtistGridItem
+import com.badap.adapters.viewHolders.LargeArtistRow
+import com.badap.adapters.viewHolders.MediumArtistRow
+import com.badap.adapters.viewHolders.SmallArtistRow
 import com.badap.utilities.HelperMethods
 
 class ArtistRecyclerAdapter(

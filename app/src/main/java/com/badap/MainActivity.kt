@@ -5,16 +5,20 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
-import com.badap.fragments.ArtistsFragment
+import androidx.fragment.app.Fragment
+import com.badap.fragments.MenuFragment
 import com.badap.utilities.HelperMethods
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg
 import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         setupPermissions()
         initializeFfmpeg()
 
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.main_navigator)
+        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
         val prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE)
         val helperMethods = HelperMethods()
         val screenSize = helperMethods.getScreenSize(this)
@@ -38,8 +45,45 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val artistFragment = ArtistsFragment()
-        supportFragmentManager.beginTransaction().replace(R.id.main_container, artistFragment).commit()
+        val menuFragment = MenuFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.main_container, menuFragment).commit()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_viewtype_options, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    private val mOnNavigationItemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.bottom_navigator_music -> {
+                    loadFragment(MenuFragment())
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.bottom_navigator_profile -> {
+//                    loadFragment(RunsMenuFragment())
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.bottom_navigator_friends -> {
+//                    loadFragment(SearchFragment())
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.bottom_navigator_search -> {
+//                    loadFragment(GroupsFragment())
+                    return@OnNavigationItemSelectedListener true
+                }
+            }
+            false
+        }
+
+    private fun loadFragment(fragment: Fragment?) {
+        if (fragment != null) {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.main_container, fragment)
+                .commit()
+        }
     }
 
     private fun setupPermissions() {

@@ -34,14 +34,14 @@ class LargeSongRow(private var view: View, private var mContext: FragmentActivit
         helper.goToSongFragment(song, mContext)
     }
 
-    fun bindViewHolder(song: Song) {
+    fun bindViewHolder(song: Song, width: Int) {
         this.song = song
         mSongNameView?.text = song.name
         mArtistName?.text = song.artist
         mAlbumName?.text = song.album
         mDuration?.text = song.duration
         mAlbumArt?.let {
-            helper.insertImageFromUri(mAlbumArtUri, it, mContext, null)
+            helper.insertImageFromUri(mAlbumArtUri, it, mContext, width)
         }
     }
 }
@@ -72,14 +72,14 @@ class MediumSongRow(v: View, private val mContext: FragmentActivity, albumArtUri
         helper.goToSongFragment(song, mContext)
     }
 
-    fun bindViewHolder(song: Song) {
+    fun bindViewHolder(song: Song, width: Int) {
         this.song = song
         mSongNameView?.text = song.name
         mArtistName?.text = song.artist
         mAlbumName?.text = song.album
         mDuration?.text = song.duration
         mAlbumArt?.let {
-            helper.insertImageFromUri(mAlbumArtUri, it, mContext, null)
+            helper.insertImageFromUri(mAlbumArtUri, it, mContext, width)
         }
     }
 }
@@ -111,14 +111,14 @@ class SmallSongRow(view: View,
         helper.goToSongFragment(song, mContext)
     }
 
-    fun bindViewHolder(song: Song) {
+    fun bindViewHolder(song: Song, width: Int) {
         this.song = song
         mSongNameView?.text = song.name
         mArtistName?.text = song.artist
         mAlbumName?.text = song.album
         mDuration?.text = song.duration
         mAlbumArt?.let {
-            helper.insertImageFromUri(mAlbumArtUri, it, mContext, null)
+            helper.insertImageFromUri(mAlbumArtUri, it, mContext, width)
         }
     }
 }

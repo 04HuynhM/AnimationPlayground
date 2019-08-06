@@ -9,7 +9,6 @@ import com.badap.Artist
 import com.badap.R
 import com.badap.utilities.HelperMethods
 
-//Single Span View Holders (linearLayout)
 class LargeArtistRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHolder(v), View.OnClickListener {
     private var view: View = v
     private var artist: Artist? = null

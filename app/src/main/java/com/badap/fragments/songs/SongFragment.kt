@@ -1,4 +1,4 @@
-package com.badap.fragments
+package com.badap.fragments.songs
 
 import android.os.Bundle
 import android.util.Log

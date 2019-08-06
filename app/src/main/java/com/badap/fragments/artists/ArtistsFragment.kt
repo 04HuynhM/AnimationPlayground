@@ -1,19 +1,18 @@
-package com.badap.fragments
+package com.badap.fragments.artists
 
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Button
 import androidx.core.content.edit
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.badap.Artist
-import com.badap.adapters.ArtistRecyclerAdapter
 import com.badap.R
+import com.badap.adapters.ArtistRecyclerAdapter
 import com.badap.utilities.MediaStoreHelper
 
 class ArtistsFragment : Fragment() {
@@ -22,30 +21,32 @@ class ArtistsFragment : Fragment() {
         var companionArtistList: ArrayList<Artist>? = null
     }
 
+    lateinit var adapter: ArtistRecyclerAdapter
+    lateinit var prefs: SharedPreferences
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_artists, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val mediaHelper = MediaStoreHelper()
 
         val layoutManager = GridLayoutManager(requireContext(), 12)
         val recyclerView = view.findViewById<RecyclerView>(R.id.artists_recycler)
-        val scaleUpButton: Button = view.findViewById(R.id.scaleUpButton)
-        val scaleDownButton: Button = view.findViewById(R.id.scaleDownButton)
 
-        val preferences = requireActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE)
-        val initialViewMode = preferences.getInt("view_mode", 2)
-        val screenWidth = preferences.getInt("screen_width", -1)
+        val mediaHelper = MediaStoreHelper()
 
-        val adapter: ArtistRecyclerAdapter?
+        prefs = requireActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE)
+        val initialViewMode = prefs.getInt("view_mode", 2)
+        val screenWidth = prefs.getInt("screen_width", -1)
 
         recyclerView.layoutManager = layoutManager
+
         if (companionArtistList.isNullOrEmpty()) {
             companionArtistList = mediaHelper.getAllArtists(requireContext())
             adapter = ArtistRecyclerAdapter(companionArtistList!!, requireActivity(), screenWidth, initialViewMode)
@@ -68,29 +69,35 @@ class ArtistsFragment : Fragment() {
                 }
             }
         }
+    }
 
-        scaleUpButton.setOnClickListener {
-            val currentViewMode = preferences.getInt("view_mode", 1)
-            if (currentViewMode > 1) {
-                val newViewMode = currentViewMode - 1
-                adapter.setViewType(newViewMode)
-                println("NEW MODE: $newViewMode")
-                preferences.edit { putInt("view_mode", newViewMode) }
-                adapter.notifyItemRangeChanged(0, adapter.itemCount)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.large_grid_option -> {
+                setViewType(1)
+            }
+            R.id.large_row_option -> {
+                setViewType(2)
+            }
+            R.id.medium_grid_option -> {
+                setViewType(4)
+            }
+            R.id.medium_row_option -> {
+                setViewType(3)
+            }
+            R.id.small_grid_option -> {
+                setViewType(5)
+            }
+            R.id.small_row_option -> {
+                setViewType(6)
             }
         }
+        return super.onOptionsItemSelected(item)
+    }
 
-        scaleDownButton.setOnClickListener {
-            val currentViewMode = preferences.getInt("view_mode", 1)
-            if (currentViewMode < 6) {
-                val newViewMode = currentViewMode + 1
-                adapter.setViewType(newViewMode)
-                println("NEW MODE: $newViewMode")
-                preferences.edit { putInt("view_mode", newViewMode) }
-                adapter.notifyItemRangeChanged(0, adapter.itemCount)
-            }
-        }
-
-
+    private fun setViewType(viewType: Int) {
+        adapter.setViewType(viewType)
+        adapter.notifyItemRangeChanged(0, adapter.itemCount)
+        prefs.edit { putInt("view_mode", viewType)?.apply() }
     }
 }

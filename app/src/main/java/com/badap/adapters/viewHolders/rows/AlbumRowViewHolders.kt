@@ -28,7 +28,7 @@ class LargeAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHold
     }
 
     override fun onClick(p0: View?) {
-        helper.goToSingleAlbumFragment(album, mContext)
+        helper.goToAlbumSongsFragment(album, mContext)
     }
 
     fun bindViewHolder(album: Album, width: Int) {
@@ -62,7 +62,7 @@ class MediumAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHol
     }
 
     override fun onClick(p0: View?) {
-        helper.goToSingleAlbumFragment(album, mContext)
+        helper.goToAlbumSongsFragment(album, mContext)
     }
 
     fun bindViewHolder(album: Album, width: Int) {
@@ -96,7 +96,7 @@ class SmallAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHold
     }
 
     override fun onClick(p0: View?) {
-        helper.goToSingleAlbumFragment(album, mContext)
+        helper.goToAlbumSongsFragment(album, mContext)
     }
 
     fun bindViewHolder(album: Album, width: Int) {

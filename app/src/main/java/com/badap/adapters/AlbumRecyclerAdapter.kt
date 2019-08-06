@@ -2,6 +2,8 @@ package com.badap.adapters
 
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.badap.adapters.viewHolders.gridItems.GenericGridItemViewHolder
 import com.badap.adapters.viewHolders.rows.LargeAlbumRow
@@ -13,24 +15,33 @@ import com.badap.utilities.HelperMethods
 
 class AlbumRecyclerAdapter(private val albumList: ArrayList<Album>,
                            private val activity: FragmentActivity,
-                           private val screenWidth: Int)
-    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+                           private val screenWidth: Int,
+                           private var currentViewType: Int)
+    : ListAdapter<Album, RecyclerView.ViewHolder>(ListItemCallback()) {
 
-    private val helper = HelperMethods()
-    private var viewMode = 1
+    class ListItemCallback : DiffUtil.ItemCallback<Album>() {
+        override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean {
+            return oldItem == newItem
+        }
 
-    enum class ViewType {
-        SMALL_ROW,
-        MEDIUM_ROW,
-        LARGE_ROW,
-        SMALL_GRID,
-        MEDIUM_GRID,
-        LARGE_GRID
+        override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean {
+            return oldItem.albumId == newItem.albumId
+        }
     }
 
-    fun setSpan(viewMode: Int) {
-        this.viewMode = viewMode
-        notifyDataSetChanged()
+    private val helper = HelperMethods()
+
+    enum class ViewType {
+        LARGE_GRID,
+        LARGE_ROW,
+        MEDIUM_ROW,
+        MEDIUM_GRID,
+        SMALL_GRID,
+        SMALL_ROW
+    }
+
+    fun setViewType(newViewType: Int) {
+        this.currentViewType = newViewType
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -79,7 +90,7 @@ class AlbumRecyclerAdapter(private val albumList: ArrayList<Album>,
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (viewMode) {
+        return when (currentViewType) {
             1 -> ViewType.LARGE_GRID.ordinal
             2 -> ViewType.LARGE_ROW.ordinal
             3 -> ViewType.MEDIUM_ROW.ordinal

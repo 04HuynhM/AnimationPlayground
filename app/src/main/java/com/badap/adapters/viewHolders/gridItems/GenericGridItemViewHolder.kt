@@ -1,7 +1,6 @@
 package com.badap.adapters.viewHolders.gridItems
 
 import android.net.Uri
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -37,7 +36,7 @@ class GenericGridItemViewHolder(view: View,
     override fun onClick(p0: View?) {
         when(val data = this.data) {
             is Album -> {
-                helper.goToSingleAlbumFragment(data, activity)
+                helper.goToAlbumSongsFragment(data, activity)
             }
             is Song -> {
                 helper.goToSongFragment(data, activity)

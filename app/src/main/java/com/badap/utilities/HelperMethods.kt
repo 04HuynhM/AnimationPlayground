@@ -11,20 +11,22 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.FragmentActivity
 import com.badap.*
-import com.badap.fragments.AlbumsFragment
-import com.badap.fragments.SingleAlbumFragment
-import com.badap.fragments.SongFragment
+import com.badap.fragments.albums.AlbumsFragment
+import com.badap.fragments.songs.AlbumSongsFragment
+import com.badap.fragments.songs.SongFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 
 class HelperMethods {
-    fun goToSingleAlbumFragment(album: Album?, context: FragmentActivity?) {
-        val singleAlbumFragment = SingleAlbumFragment()
+    fun goToAlbumSongsFragment(album: Album?, context: FragmentActivity?) {
+        val singleAlbumFragment = AlbumSongsFragment()
         val bundle = Bundle()
-        bundle.putString("albumArt", album?.albumArt.toString())
-        bundle.putString("albumId", album?.albumId)
+        album?.let {
+            bundle.putString("albumArt", it.albumArt.toString())
+            bundle.putString("albumId", it.albumId)
+            bundle.putString("albumName", it.albumName)
+        }
         singleAlbumFragment.arguments = bundle
 
         context?.supportFragmentManager
@@ -37,7 +39,10 @@ class HelperMethods {
     fun goToAlbumListFragment(artist: Artist?, context: FragmentActivity?) {
         val albumsFragment = AlbumsFragment()
         val bundle = Bundle()
-        artist?.artistIdLong?.let { bundle.putLong("artistId", it) }
+        artist?.let {
+            bundle.putLong("artistId", it.artistIdLong)
+            bundle.putString("artistName", it.artistName)
+        }
         albumsFragment.arguments = bundle
         context?.supportFragmentManager
             ?.beginTransaction()

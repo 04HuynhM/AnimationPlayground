@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/bottom_navigator_run_tracker"
+    <item android:id="@+id/bottom_navigator_music"
         android:title="@string/bottom_navigator_music"
         android:icon="@drawable/ic_music_note_black_24dp" />
-    <item android:id="@+id/bottom_navigator_groups"
+    <item android:id="@+id/bottom_navigator_friends"
         android:title="@string/bottom_navigator_friends"
         android:icon="@drawable/ic_group_black_24dp" />
     <item android:id="@+id/bottom_navigator_profile"

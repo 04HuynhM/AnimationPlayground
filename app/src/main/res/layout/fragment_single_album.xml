@@ -6,12 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
-    tools:context=".fragments.SingleAlbumFragment">
+    tools:context=".fragments.songs.AlbumSongsFragment">
 
     <ImageView
         android:id="@+id/single_album_art"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:scaleType="centerCrop"
         android:src="@color/design_default_color_primary"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"

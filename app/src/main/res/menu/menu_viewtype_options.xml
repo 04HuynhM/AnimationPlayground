@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/button_viewmode_option"
+        android:icon="@drawable/ic_view_module_white_24dp"
+        android:title=""
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/large_grid_option"
+                android:icon="@drawable/ic_view_module_grey_24dp"
+                android:title="Large grid" />
+            <item
+                android:id="@+id/large_row_option"
+                android:icon="@drawable/ic_view_list_grey_24dp"
+                android:title="Large row" />
+            <item
+                android:id="@+id/medium_grid_option"
+                android:icon="@drawable/ic_view_module_grey_24dp"
+                android:title="Medium grid" />
+            <item
+                android:id="@+id/medium_row_option"
+                android:icon="@drawable/ic_view_list_grey_24dp"
+                android:title="Medium row" />
+            <item
+                android:id="@+id/small_grid_option"
+                android:icon="@drawable/ic_view_module_grey_24dp"
+                android:title="Small grid" />
+            <item
+                android:id="@+id/small_row_option"
+                android:icon="@drawable/ic_view_list_grey_24dp"
+                android:title="Small row" />
+        </menu>
+    </item>
+</menu>
