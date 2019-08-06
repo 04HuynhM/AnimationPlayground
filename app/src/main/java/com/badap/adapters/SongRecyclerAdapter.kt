@@ -39,12 +39,12 @@ class SongRecyclerAdapter(private val songList: ArrayList<Song>,
     }
 
     enum class ViewType {
-        SMALL_ROW,
-        MEDIUM_ROW,
+        LARGE_GRID,
         LARGE_ROW,
-        SMALL_GRID,
+        MEDIUM_ROW,
         MEDIUM_GRID,
-        LARGE_GRID
+        SMALL_GRID,
+        SMALL_ROW
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

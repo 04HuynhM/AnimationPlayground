@@ -4,22 +4,19 @@ package com.badap.fragments.artists
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.*
-import android.widget.Button
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.badap.Artist
+import com.badap.MainActivity
 import com.badap.R
 import com.badap.adapters.ArtistRecyclerAdapter
-import com.badap.utilities.MediaStoreHelper
 
 class ArtistsFragment : Fragment() {
-
-    companion object ArtistList{
-        var companionArtistList: ArrayList<Artist>? = null
-    }
 
     lateinit var adapter: ArtistRecyclerAdapter
     lateinit var prefs: SharedPreferences
@@ -39,20 +36,14 @@ class ArtistsFragment : Fragment() {
         val layoutManager = GridLayoutManager(requireContext(), 12)
         val recyclerView = view.findViewById<RecyclerView>(R.id.artists_recycler)
 
-        val mediaHelper = MediaStoreHelper()
-
         prefs = requireActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE)
         val initialViewMode = prefs.getInt("view_mode", 2)
         val screenWidth = prefs.getInt("screen_width", -1)
 
         recyclerView.layoutManager = layoutManager
 
-        if (companionArtistList.isNullOrEmpty()) {
-            companionArtistList = mediaHelper.getAllArtists(requireContext())
-            adapter = ArtistRecyclerAdapter(companionArtistList!!, requireActivity(), screenWidth, initialViewMode)
-            recyclerView.adapter = adapter
-        } else {
-            adapter = ArtistRecyclerAdapter(companionArtistList!!, requireActivity(), screenWidth, initialViewMode)
+        MainActivity.indexedArtists?.let {
+            adapter = ArtistRecyclerAdapter(it, requireActivity(), screenWidth, initialViewMode)
             recyclerView.adapter = adapter
         }
 

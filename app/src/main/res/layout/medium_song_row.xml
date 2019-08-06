@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/medium_row_song_image"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -22,28 +22,26 @@
 
     <TextView
         android:id="@+id/medium_row_song_name"
-        android:layout_width="0dp"
+        android:layout_width="259dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:maxLines="1"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/medium_row_song_artist_album"
         app:layout_constraintStart_toEndOf="@+id/medium_row_song_image"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/medium_row_song_image"
         tools:text="Song Name" />
 
     <TextView
         android:id="@+id/medium_row_song_artist_album"
-        android:layout_width="0dp"
+        android:layout_width="259dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:maxLines="1"
         android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
         app:layout_constraintStart_toStartOf="@+id/medium_row_song_name"
         app:layout_constraintTop_toBottomOf="@+id/medium_row_song_name"
         tools:text="Artist - Album" />
@@ -52,21 +50,24 @@
         android:id="@+id/medium_row_song_duration"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
         android:maxLines="1"
         android:textSize="9sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/medium_row_song_artist_album"
-        app:layout_constraintTop_toBottomOf="@+id/medium_row_song_artist_album"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
         tools:text="Duration" />
 
-    <View
-        android:id="@+id/divider5"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="parent" />
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/medium_row_song_image"
+        app:layout_constraintStart_toStartOf="@+id/medium_row_song_name"
+        app:layout_constraintTop_toBottomOf="@+id/medium_row_song_artist_album"
+        app:srcCompat="@drawable/ic_access_time_black_24dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.badap.adapters.viewHolders.rows
 
+import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -38,7 +39,7 @@ class LargeAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHold
         albumArtistTextView?.text = album.artist
         albumImage?.let {
             it.layoutParams.width = width
-            helper.insertImageFromUri(album.albumArt, it, mContext, width)
+            helper.insertImageFromUri(Uri.parse(album.albumArt), it, mContext, width)
         }
     }
 }
@@ -72,7 +73,7 @@ class MediumAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHol
         albumArtistTextView?.text = album.artist
         albumImage?.let {
             it.layoutParams.width = width
-            helper.insertImageFromUri(album.albumArt, it, mContext, width)
+            helper.insertImageFromUri(Uri.parse(album.albumArt), it, mContext, width)
         }
     }
 }
@@ -106,7 +107,7 @@ class SmallAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHold
         albumArtistTextView?.text = album.artist
         albumImage?.let {
             it.layoutParams.width = width
-            helper.insertImageFromUri(album.albumArt, it, mContext, width)
+            helper.insertImageFromUri(Uri.parse(album.albumArt), it, mContext, width)
         }
     }
 }

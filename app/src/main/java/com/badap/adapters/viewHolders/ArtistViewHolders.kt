@@ -1,5 +1,6 @@
 package com.badap.adapters.viewHolders
 
+import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -38,7 +39,7 @@ class LargeArtistRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHol
         mNumOfAlbums?.text = artist.artistNumberOfAlbums
         mArtistImage?.let {
             it.layoutParams.width = width
-            helper.insertImageFromUri(artist.firstAlbumArt, it, mContext, width)
+            helper.insertImageFromUri(Uri.parse(artist.firstAlbumArt), it, mContext, width)
         }
     }
 }
@@ -72,7 +73,7 @@ class MediumArtistRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHo
         mNumOfAlbums?.text = artist.artistNumberOfAlbums
         mArtistImage?.let {
             it.layoutParams.width = width
-            helper.insertImageFromUri(artist.firstAlbumArt, it, mContext, width)
+            helper.insertImageFromUri(Uri.parse(artist.firstAlbumArt), it, mContext, width)
         }
     }
 }
@@ -106,7 +107,7 @@ class SmallArtistRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHol
         mNumOfAlbums?.text = artist.artistNumberOfAlbums
         mArtistImage?.let {
             it.layoutParams.width = width
-            helper.insertImageFromUri(artist.firstAlbumArt, it, mContext, width)
+            helper.insertImageFromUri(Uri.parse(artist.firstAlbumArt), it, mContext, width)
         }
     }
 }
@@ -138,7 +139,7 @@ class ArtistGridItem(v: View, activity: FragmentActivity, private val width: Int
         mNameView?.text = artist.artistName
         mArtistImage?.let {
             it.layoutParams.width = width
-            helper.insertImageFromUri(artist.firstAlbumArt, it, mContext, width)
+            helper.insertImageFromUri(Uri.parse(artist.firstAlbumArt), it, mContext, width)
         }
     }
 }

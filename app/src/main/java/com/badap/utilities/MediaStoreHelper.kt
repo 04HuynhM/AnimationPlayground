@@ -84,10 +84,9 @@ class MediaStoreHelper {
                     val numOfTracks = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Artists.NUMBER_OF_TRACKS))
                     val numOfAlbums = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Artists.NUMBER_OF_ALBUMS))
                     val artistIdLong = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Artists._ID))
-
                     val albumArtUri = getFirstAlbumArtUri(context, artistIdLong)
 
-                    artistList.add(Artist(artistId, artistName, numOfTracks, numOfAlbums, artistIdLong, albumArtUri))
+                    artistList.add(Artist(artistId, artistName, numOfTracks, numOfAlbums, artistIdLong, albumArtUri.toString()))
                 }
             }
             cursor.close()
@@ -124,7 +123,7 @@ class MediaStoreHelper {
                     val albumIdLong = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Albums._ID))
 
                     val albumArt = getAlbumArtUri(albumIdLong)
-                    albumList.add(Album(albumId, albumName, artist, numOfSongs, albumArt))
+                    albumList.add(Album(albumId, albumName, artist, numOfSongs, albumArt.toString()))
                 }
             }
             cursor.close()
@@ -198,7 +197,7 @@ class MediaStoreHelper {
                 while (cursor.moveToNext()) {
                     val path = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA))
                     val artistId = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST_ID))
-                    val albumId = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID))
+                    val cursorAlbumId = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID))
                     val displayName = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME))
                     val title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE))
                     val album = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM))
@@ -210,7 +209,7 @@ class MediaStoreHelper {
                     val songId = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID))
 
                     songList.add(
-                        Song(songId, displayName, title, trackNumber, album, albumId, artist, artistId, path, duration, rawDuration)
+                        Song(songId, displayName, title, trackNumber, album, cursorAlbumId, artist, artistId, path, duration, rawDuration)
                     )
                 }
             }
@@ -247,7 +246,7 @@ class MediaStoreHelper {
 
                     val albumArt = getAlbumArtUri(albumIdLong)
                     albumList.add(
-                        Album(albumId, title, artist, numOfTracks, albumArt)
+                        Album(albumId, title, artist, numOfTracks, albumArt.toString())
                     )
                 }
             }

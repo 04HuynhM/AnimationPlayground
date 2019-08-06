@@ -9,16 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.badap.Album
+import com.badap.MainActivity
 import com.badap.adapters.AlbumRecyclerAdapter
 import com.badap.R
 import com.badap.utilities.MediaStoreHelper
 
 
 class AllAlbumsFragment : Fragment() {
-
-    companion object {
-        var companionAllAlbumList: ArrayList<Album>? = null
-    }
 
     lateinit var adapter: AlbumRecyclerAdapter
     lateinit var prefs: SharedPreferences
@@ -27,7 +24,6 @@ class AllAlbumsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_albums, container, false)
         setHasOptionsMenu(true)
         requireActivity().title = "Albums"
@@ -40,18 +36,12 @@ class AllAlbumsFragment : Fragment() {
         val layoutManager = GridLayoutManager(requireContext(), 12)
         val recyclerView = view.findViewById<RecyclerView>(R.id.albums_recycler)
 
-        val mediaHelper = MediaStoreHelper()
-
         prefs = requireContext().getSharedPreferences("prefs", Context.MODE_PRIVATE)
         val initialViewMode = prefs.getInt("view_mode", 1)
         val screenWidth = prefs.getInt("screen_width", -1)
 
-        if (companionAllAlbumList.isNullOrEmpty()) {
-            companionAllAlbumList = mediaHelper.getAllAlbums(requireContext())
-            adapter = AlbumRecyclerAdapter(companionAllAlbumList!!, requireActivity(), screenWidth, initialViewMode)
-            recyclerView.adapter = adapter
-        } else {
-            adapter = AlbumRecyclerAdapter(companionAllAlbumList!!, requireActivity(), screenWidth, initialViewMode)
+        MainActivity.indexedAlbums?.let {
+            adapter = AlbumRecyclerAdapter(it, requireActivity(), screenWidth, initialViewMode)
             recyclerView.adapter = adapter
         }
 

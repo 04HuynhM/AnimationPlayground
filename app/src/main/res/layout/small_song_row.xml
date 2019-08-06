@@ -8,9 +8,18 @@
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/small_row_song_duration"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="@+id/small_row_song_duration"
+        app:srcCompat="@drawable/ic_access_time_black_24dp" />
+
+    <ImageView
         android:id="@+id/small_row_song_image"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -30,22 +39,23 @@
         android:maxLines="1"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toTopOf="@+id/small_row_song_artist_album"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/small_row_song_image"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/small_row_song_image"
         tools:text="Name" />
 
     <TextView
         android:id="@+id/small_row_song_artist_album"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:maxLines="1"
         android:textSize="10sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="@+id/small_row_song_image"
+        app:layout_constraintEnd_toStartOf="@+id/imageView4"
         app:layout_constraintStart_toStartOf="@+id/small_row_song_name"
         app:layout_constraintTop_toBottomOf="@+id/small_row_song_name"
         tools:text="Album - Artist" />

@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -15,13 +14,22 @@ import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import com.badap.fragments.MenuFragment
 import com.badap.utilities.HelperMethods
+import com.badap.utilities.MediaStoreHelper
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg
 import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.io.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        var indexedArtists: ArrayList<Artist>? = null
+        var indexedAlbums: ArrayList<Album>? = null
+        var lastUpdated: Date? = null
+    }
 
     private val PERMISSIONS_REQUEST_CODE = 101
 
@@ -44,9 +52,53 @@ class MainActivity : AppCompatActivity() {
                 putInt("screen_height", screenSize.y)
             }
         }
+        getCachedLibrary()
 
         val menuFragment = MenuFragment()
         supportFragmentManager.beginTransaction().replace(R.id.main_container, menuFragment).commit()
+    }
+
+    private fun cacheCurrentLibrary() {
+        val filePath = getCachedDirectory()
+
+        val fos = FileOutputStream(filePath)
+        val oos = ObjectOutputStream(fos)
+
+        val dataArray = arrayOf(indexedArtists, indexedAlbums)
+        oos.writeObject(dataArray)
+    }
+
+    private fun getCachedLibrary() {
+        val dataFile = getCachedDirectory()
+
+        if (dataFile.exists()) {
+
+            val fis = FileInputStream(dataFile)
+            val ois = ObjectInputStream(fis)
+
+            val dataArray = ois.readObject() as Array<ArrayList<*>>
+            indexedArtists = dataArray[0] as ArrayList<Artist>
+            indexedAlbums = dataArray[1] as ArrayList<Album>
+        } else {
+            initializeLibraryArrays()
+        }
+    }
+
+    private fun initializeLibraryArrays() {
+        val mediaHelper = MediaStoreHelper()
+        indexedAlbums = mediaHelper.getAllAlbums(this)
+        indexedArtists = mediaHelper.getAllArtists(this)
+        lastUpdated = Date()
+
+        cacheCurrentLibrary()
+    }
+
+    private fun getCachedDirectory() : File{
+        val indexFolder = File(this.cacheDir.absolutePath + "/library_index")
+        if(!indexFolder.exists()) {
+            indexFolder.mkdir()
+        }
+        return File(indexFolder, "data.ser")
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

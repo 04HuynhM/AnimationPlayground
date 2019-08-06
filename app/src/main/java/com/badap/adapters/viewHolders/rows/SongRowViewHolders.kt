@@ -36,7 +36,7 @@ class LargeSongRow(private var view: View, private var mContext: FragmentActivit
 
     fun bindViewHolder(song: Song, width: Int) {
         this.song = song
-        mSongNameView?.text = song.name
+        mSongNameView?.text = song.title
         mArtistName?.text = song.artist
         mAlbumName?.text = song.album
         mDuration?.text = song.duration
@@ -53,18 +53,16 @@ class MediumSongRow(v: View, private val mContext: FragmentActivity, albumArtUri
     private var song: Song? = null
     private var mSongNameView : TextView? = null
     private var mArtistName: TextView? = null
-    private var mAlbumName: TextView? = null
     private var mDuration: TextView? = null
     private var mAlbumArt: ImageView? = null
     private val helper = HelperMethods()
     private val mAlbumArtUri: Uri = albumArtUri
 
     init {
-        mSongNameView = view.findViewById(R.id.custom_row_song_name)
-        mArtistName = view.findViewById(R.id.custom_row_song_artist)
-        mAlbumName = view.findViewById(R.id.custom_row_song_album)
-        mDuration = view.findViewById(R.id.custom_row_song_duration)
-        mAlbumArt = view.findViewById(R.id.custom_row_song_image)
+        mSongNameView = view.findViewById(R.id.medium_row_song_name)
+        mArtistName = view.findViewById(R.id.medium_row_song_artist_album)
+        mDuration = view.findViewById(R.id.medium_row_song_duration)
+        mAlbumArt = view.findViewById(R.id.medium_row_song_image)
         v.setOnClickListener(this)
     }
 
@@ -74,9 +72,8 @@ class MediumSongRow(v: View, private val mContext: FragmentActivity, albumArtUri
 
     fun bindViewHolder(song: Song, width: Int) {
         this.song = song
-        mSongNameView?.text = song.name
-        mArtistName?.text = song.artist
-        mAlbumName?.text = song.album
+        mSongNameView?.text = song.title
+        mArtistName?.text = "${song.artist} | ${song.album}"
         mDuration?.text = song.duration
         mAlbumArt?.let {
             helper.insertImageFromUri(mAlbumArtUri, it, mContext, width)
@@ -91,19 +88,17 @@ class SmallSongRow(view: View,
 
     private var song: Song? = null
     private var mSongNameView : TextView? = null
-    private var mArtistName: TextView? = null
-    private var mAlbumName: TextView? = null
+    private var mArtistAlbumText: TextView? = null
     private var mDuration: TextView? = null
     private var mAlbumArt: ImageView? = null
     private val helper = HelperMethods()
     private val mAlbumArtUri: Uri = albumArtUri
 
     init {
-        mSongNameView = view.findViewById(R.id.custom_row_song_name)
-        mArtistName = view.findViewById(R.id.custom_row_song_artist)
-        mAlbumName = view.findViewById(R.id.custom_row_song_album)
-        mDuration = view.findViewById(R.id.custom_row_song_duration)
-        mAlbumArt = view.findViewById(R.id.custom_row_song_image)
+        mSongNameView = view.findViewById(R.id.small_row_song_name)
+        mArtistAlbumText = view.findViewById(R.id.small_row_song_artist_album)
+        mDuration = view.findViewById(R.id.small_row_song_duration)
+        mAlbumArt = view.findViewById(R.id.small_row_song_image)
         view.setOnClickListener(this)
     }
 
@@ -113,9 +108,8 @@ class SmallSongRow(view: View,
 
     fun bindViewHolder(song: Song, width: Int) {
         this.song = song
-        mSongNameView?.text = song.name
-        mArtistName?.text = song.artist
-        mAlbumName?.text = song.album
+        mSongNameView?.text = song.title
+        mArtistAlbumText?.text = "${song.artist} | ${song.album}"
         mDuration?.text = song.duration
         mAlbumArt?.let {
             helper.insertImageFromUri(mAlbumArtUri, it, mContext, width)

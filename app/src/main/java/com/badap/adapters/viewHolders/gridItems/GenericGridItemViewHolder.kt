@@ -54,11 +54,11 @@ class GenericGridItemViewHolder(view: View,
                 mDetailView?.text = spannableArtist
                 mTitleView?.text = spannableName
                 mImageView?.let {
-                    helper.insertImageFromUri(data.albumArt, mImageView!!, activity, width)
+                    helper.insertImageFromUri(Uri.parse(data.albumArt), mImageView!!, activity, width)
                 }
             }
             is Song -> {
-                val spannableName = helper.setSpannableString(data.name, colorId)
+                val spannableName = helper.setSpannableString(data.title, colorId)
                 val spannableAlbum = helper.setSpannableString(data.album, colorId)
                 mDetailView?.text = spannableAlbum
                 mTitleView?.text = spannableName

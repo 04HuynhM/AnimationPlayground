@@ -3,6 +3,7 @@ package com.badap.fragments.albums
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
@@ -47,6 +48,7 @@ class AlbumsFragment : Fragment() {
 
         adapter = AlbumRecyclerAdapter(albumList, requireActivity(), screenWidth, initialViewMode)
         recyclerView.adapter = adapter
+        recyclerView.layoutManager = layoutManager
 
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {

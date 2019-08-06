@@ -1,19 +1,19 @@
 package com.badap
 
-import android.net.Uri
+import java.io.Serializable
 
 data class Artist(val artistId: String,
                   val artistName: String,
                   val artistNumberOfTracks: String,
                   val artistNumberOfAlbums: String,
                   val artistIdLong: Long,
-                  val firstAlbumArt: Uri?)
+                  val firstAlbumArt: String?) : Serializable
 
 data class Album(val albumId: String,
                   val albumName: String,
                   val artist: String,
                   val numOfSongs: String,
-                  val albumArt: Uri?)
+                  val albumArt: String?) : Serializable
 
 data class Song(val songId: Long,
                 val name: String,
@@ -25,4 +25,4 @@ data class Song(val songId: Long,
                 val artistId: String,
                 val path: String,
                 val duration: String,
-                val rawDuration: String)
+                val rawDuration: String) : Serializable
