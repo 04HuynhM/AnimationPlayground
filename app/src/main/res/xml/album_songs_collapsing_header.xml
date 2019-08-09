@@ -26,7 +26,7 @@
                 motion:motionTarget="@id/album_songs_shuffle_button" />
             <KeyAttribute
                 android:alpha="0"
-                motion:framePosition="70"
+                motion:framePosition="20"
                 motion:motionTarget="@id/album_songs_back_button" />
         </KeyFrameSet>
     </Transition>
@@ -39,6 +39,16 @@
         </Constraint>
 
         <Constraint android:id="@+id/album_songs_back_button" >
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/standard_button_height"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintHorizontal_bias="0.0"
+                motion:layout_constraintStart_toStartOf="parent"
+                motion:layout_constraintTop_toTopOf="parent" />
             <Motion motion:transitionEasing="linear"/>
             <PropertySet android:alpha="1" />
         </Constraint>
@@ -76,6 +86,16 @@
         </Constraint>
 
         <Constraint android:id="@+id/album_songs_back_button" >
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/standard_button_height"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintHorizontal_bias="1.0"
+                motion:layout_constraintStart_toStartOf="parent"
+                motion:layout_constraintTop_toTopOf="parent" />
             <Motion motion:transitionEasing="linear"/>
             <PropertySet android:alpha="0" />
         </Constraint>

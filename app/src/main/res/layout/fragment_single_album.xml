@@ -27,12 +27,15 @@
         android:layout_height="@dimen/standard_button_height"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:alpha="1"
         android:background="@drawable/back_button_shape"
         android:drawableStart="@drawable/ic_arrow_back_black_24dp"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:text="Library"
+        android:text="Albums"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

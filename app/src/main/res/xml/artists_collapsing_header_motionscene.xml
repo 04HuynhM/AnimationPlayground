@@ -12,19 +12,19 @@
         <KeyFrameSet>
             <KeyAttribute
                 android:alpha="0"
-                motion:framePosition="75"
+                motion:framePosition="65"
                 motion:motionTarget="@id/artists_title" />
             <KeyAttribute
                 android:alpha="0"
-                motion:framePosition="75"
+                motion:framePosition="65"
                 motion:motionTarget="@id/artists_play_button" />
             <KeyAttribute
                 android:alpha="0"
-                motion:framePosition="75"
+                motion:framePosition="65"
                 motion:motionTarget="@id/artists_shuffle_button" />
             <KeyAttribute
                 android:alpha="0"
-                motion:framePosition="75"
+                motion:framePosition="20"
                 motion:motionTarget="@id/artists_back_button" />
         </KeyFrameSet>
 
@@ -37,47 +37,28 @@
                 android:layout_height="@dimen/standard_button_height"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
+                android:layout_marginEnd="8dp"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintHorizontal_bias="0.0"
                 motion:layout_constraintStart_toStartOf="parent"
                 motion:layout_constraintTop_toTopOf="parent" />
             <PropertySet android:alpha="1"/>
-            <Motion motion:transitionEasing="decelerate"/>
+            <Motion motion:transitionEasing="linear"/>
         </Constraint>
 
         <Constraint android:id="@+id/artists_title">
-            <Layout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                motion:layout_constraintStart_toStartOf="parent"
-                motion:layout_constraintTop_toBottomOf="@+id/artists_back_button" />
             <PropertySet android:alpha="1"/>
-            <Motion motion:transitionEasing="decelerate"/>
+            <Motion motion:transitionEasing="linear"/>
         </Constraint>
 
         <Constraint android:id="@+id/artists_play_button">
-            <Layout
-                android:layout_width="45dp"
-                android:layout_height="@dimen/standard_button_height"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                motion:layout_constraintStart_toStartOf="parent"
-                motion:layout_constraintTop_toBottomOf="@+id/artists_title" />
             <PropertySet android:alpha="1"/>
-            <Motion motion:transitionEasing="decelerate"/>
+            <Motion motion:transitionEasing="linear"/>
         </Constraint>
 
         <Constraint android:id="@+id/artists_shuffle_button">
-            <Layout
-                android:layout_width="45dp"
-                android:layout_height="@dimen/standard_button_height"
-                android:layout_marginStart="16dp"
-                motion:layout_constraintStart_toEndOf="@+id/artists_play_button"
-                motion:layout_constraintTop_toTopOf="@+id/artists_play_button" />
             <PropertySet android:alpha="1"/>
-            <Motion motion:transitionEasing="decelerate"/>
+            <Motion motion:transitionEasing="linear"/>
         </Constraint>
 
         <Constraint
@@ -85,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            motion:layout_constraintGuide_percent="0.23">
+            motion:layout_constraintGuide_percent="0.28">
             <Motion motion:transitionEasing="linear"/>
         </Constraint>
 
@@ -100,43 +81,28 @@
                 android:layout_height="@dimen/standard_button_height"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintHorizontal_bias="1.0"
                 motion:layout_constraintStart_toStartOf="parent"
-                motion:layout_constraintTop_toTopOf="parent"/>
+                motion:layout_constraintTop_toTopOf="parent" />
             <PropertySet android:alpha="0"/>
-            <Motion motion:transitionEasing="decelerate"/>
+            <Motion motion:transitionEasing="linear"/>
         </Constraint>
 
         <Constraint android:id="@+id/artists_title">
-            <Layout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                motion:layout_constraintStart_toEndOf="@+id/artists_back_button"
-                motion:layout_constraintTop_toTopOf="@+id/artists_back_button" />
             <PropertySet android:alpha="0"/>
-            <Motion motion:transitionEasing="decelerate"/>
+            <Motion motion:transitionEasing="linear"/>
         </Constraint>
 
         <Constraint android:id="@+id/artists_play_button" >
-            <Layout
-                android:layout_width="45dp"
-                android:layout_height="@dimen/standard_button_height"
-                android:layout_marginStart="16dp"
-                motion:layout_constraintStart_toEndOf="@+id/artists_title"
-                motion:layout_constraintTop_toTopOf="@+id/artists_back_button" />
             <PropertySet android:alpha="0"/>
-            <Motion motion:transitionEasing="decelerate"/>
+            <Motion motion:transitionEasing="linear"/>
         </Constraint>
 
         <Constraint android:id="@+id/artists_shuffle_button">
-            <Layout
-                android:layout_width="45dp"
-                android:layout_height="@dimen/standard_button_height"
-                android:layout_marginStart="16dp"
-                motion:layout_constraintStart_toEndOf="@+id/artists_play_button"
-                motion:layout_constraintTop_toTopOf="@+id/artists_play_button" />
             <PropertySet android:alpha="0" />
-            <Motion motion:transitionEasing="decelerate"/>
+            <Motion motion:transitionEasing="linear"/>
         </Constraint>
 
         <Constraint

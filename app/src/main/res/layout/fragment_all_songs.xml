@@ -14,12 +14,15 @@
         android:layout_height="@dimen/standard_button_height"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:alpha="1"
         android:background="@drawable/back_button_shape"
         android:drawableStart="@drawable/ic_arrow_back_black_24dp"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:text="Library"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,14 +31,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"
+        android:alpha="1"
         android:drawableStart="@drawable/ic_g_clef_symbol"
         android:drawablePadding="8dp"
         android:text="All Songs"
         android:textSize="24sp"
-        android:alpha="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/all_songs_back_button" />
+        app:layout_constraintBottom_toTopOf="@+id/all_songs_play_button"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/all_songs_play_button"
@@ -43,11 +46,11 @@
         android:layout_width="45dp"
         android:layout_height="@dimen/standard_button_height"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:alpha="1"
         android:background="@drawable/custom_play_button_shape"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/all_songs_title" />
+        app:layout_constraintBottom_toTopOf="@+id/all_songs_recycler_guideline"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/all_songs_shuffle_button"
@@ -65,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.23" />
+        app:layout_constraintGuide_percent="0.28" />
 
 
     <androidx.recyclerview.widget.RecyclerView
