@@ -22,7 +22,6 @@ class GenericGridItemViewHolder(view: View,
     private var mImageView: ImageView? = null
     private var mContainer: ConstraintLayout? = null
 
-
     init {
         mTitleView = view.findViewById(R.id.generic_grid_item_name)
         mDetailView = view.findViewById(R.id.generic_grid_item_detail)

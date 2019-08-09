@@ -45,7 +45,7 @@ class AlbumSongsFragment : Fragment() {
         val albumArtUri = Uri.parse(albumArtUriString)
 
         val albumArtImageView = view.findViewById<ImageView>(R.id.single_album_art)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.single_album_song_recycler)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.album_songs_recycler)
 
         val songList = mediaStoreUtil.getAllSongsForAlbum(requireContext(), albumId)
 

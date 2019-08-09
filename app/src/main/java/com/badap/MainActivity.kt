@@ -19,6 +19,7 @@ import com.github.hiteshsondhi88.libffmpeg.FFmpeg
 import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -35,6 +36,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val PERMISSIONS_REQUEST_CODE = 101
+    private var isFabOpen = false
+    lateinit var optionsFab: FloatingActionButton
+    lateinit var rescanFab: FloatingActionButton
+    lateinit var viewTypeFab: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +49,18 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.main_navigator)
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
+        optionsFab = findViewById(R.id.fab_options_button)
+        rescanFab = findViewById(R.id.fab_rescan_button)
+        viewTypeFab = findViewById(R.id.fab_viewtype_button)
+
+        optionsFab.setOnClickListener {
+            if (isFabOpen) {
+                closeFabMenu()
+            } else {
+                openFabMenu()
+            }
+        }
 
         val prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE)
         val screenSize = generalUtil.getScreenSize(this)
@@ -58,6 +75,18 @@ class MainActivity : AppCompatActivity() {
 
         val menuFragment = MenuFragment()
         supportFragmentManager.beginTransaction().replace(R.id.main_container, menuFragment).commit()
+    }
+
+    private fun openFabMenu() {
+        isFabOpen = true
+        rescanFab.animate().translationY(resources.getDimension(R.dimen.standard_62))
+        viewTypeFab.animate().translationY(resources.getDimension(R.dimen.standard_115))
+    }
+
+    private fun closeFabMenu() {
+        isFabOpen = false
+        rescanFab.animate().translationY(0f)
+        viewTypeFab.animate().translationY(0f)
     }
 
     private fun cacheCurrentLibrary() {

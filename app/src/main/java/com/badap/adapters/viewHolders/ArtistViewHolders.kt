@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.badap.Artist
+import com.badap.MainActivity
 import com.badap.MainActivity.Companion.generalUtil
 import com.badap.R
 
@@ -16,7 +17,7 @@ class LargeArtistRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHol
     private var mNameView : TextView? = null
     private var mNumOfSongs: TextView? = null
     private var mNumOfAlbums: TextView? = null
-    var mArtistImage: ImageView? = null
+    private var mArtistImage: ImageView? = null
     private var mContext = activity
 
     init {
@@ -49,7 +50,7 @@ class MediumArtistRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHo
     private var mNameView : TextView? = null
     private var mNumOfSongs: TextView? = null
     private var mNumOfAlbums: TextView? = null
-    var mArtistImage: ImageView? = null
+    private var mArtistImage: ImageView? = null
     private var mContext = activity
 
     init {
@@ -82,7 +83,7 @@ class SmallArtistRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHol
     private var mNameView : TextView? = null
     private var mNumOfSongs: TextView? = null
     private var mNumOfAlbums: TextView? = null
-    var mArtistImage: ImageView? = null
+    private var mArtistImage: ImageView? = null
     private var mContext = activity
 
     init {
@@ -130,9 +131,11 @@ class ArtistGridItem(v: View, activity: FragmentActivity, private val width: Int
 
     fun bindViewHolder(artist: Artist) {
         this.artist = artist
-//        val color = mContext?.resources?.getColor(R.color.timecode_shadow, null)
-//        val artistName = color?.let { helper.setSpannableString(artist.artistName, it) }
-        mNameView?.text = artist.artistName
+        val colorId = mContext.getColor(R.color.timecode_shadow)
+
+        val artistName = MainActivity.generalUtil.setSpannableString(artist.artistName, colorId)
+
+        mNameView?.text = artistName
         mArtistImage?.let {
             it.layoutParams.width = width
             generalUtil.insertImageFromUri(Uri.parse(artist.firstAlbumArt), it, mContext, width)
