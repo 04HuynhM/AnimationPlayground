@@ -17,11 +17,13 @@ import com.badap.MainActivity
 import com.badap.MainActivity.Companion.mediaStoreUtil
 import com.badap.R
 import com.badap.adapters.SongRecyclerAdapter
+import com.badap.fragments.BottomSheetViewModeDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class AlbumSongsFragment : Fragment() {
+class AlbumSongsFragment(val viewFab: FloatingActionButton) : Fragment() {
 
     lateinit var prefs: SharedPreferences
     lateinit var adapter: SongRecyclerAdapter
@@ -30,8 +32,6 @@ class AlbumSongsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_single_album, container, false)
     }
 
@@ -45,7 +45,7 @@ class AlbumSongsFragment : Fragment() {
         val albumArtUri = Uri.parse(albumArtUriString)
 
         val albumArtImageView = view.findViewById<ImageView>(R.id.single_album_art)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.single_album_song_recycler)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.album_songs_recycler)
 
         val songList = mediaStoreUtil.getAllSongsForAlbum(requireContext(), albumId)
 
@@ -56,7 +56,7 @@ class AlbumSongsFragment : Fragment() {
         val layoutManager = GridLayoutManager(requireContext(), 12)
         recyclerView.layoutManager = layoutManager
 
-        adapter = SongRecyclerAdapter(songList, requireActivity(), screenWidth, initialViewType)
+        adapter = SongRecyclerAdapter(songList, requireActivity(), screenWidth, initialViewType, viewFab)
         recyclerView.adapter = adapter
 
         Glide.with(requireContext())
@@ -80,37 +80,14 @@ class AlbumSongsFragment : Fragment() {
                 }
             }
         }
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.update_library_index -> {
-                val activity = requireActivity() as MainActivity
-                activity.initializeLibraryArrays()
-            }
-            R.id.large_grid_option -> {
-                setViewType(1)
-            }
-            R.id.large_row_option -> {
-                setViewType(2)
-            }
-            R.id.medium_grid_option -> {
-                setViewType(4)
-            }
-            R.id.medium_row_option -> {
-                setViewType(3)
-            }
-            R.id.small_grid_option -> {
-                setViewType(5)
-            }
-            R.id.small_row_option -> {
-                setViewType(6)
-            }
+        viewFab.setOnClickListener {
+            val viewDialog = BottomSheetViewModeDialog(this, viewFab)
+            viewDialog.show(requireActivity().supportFragmentManager, "viewmode_dialog_album_songs")
         }
-        return super.onOptionsItemSelected(item)
     }
 
-    private fun setViewType(viewType: Int) {
+    fun setViewType(viewType: Int) {
         adapter.setViewType(viewType)
         adapter.notifyItemRangeChanged(0, adapter.itemCount)
         prefs.edit { putInt("view_mode", viewType)?.apply() }

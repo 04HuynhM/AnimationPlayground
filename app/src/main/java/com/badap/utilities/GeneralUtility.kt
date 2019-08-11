@@ -9,18 +9,26 @@ import android.text.style.BackgroundColorSpan
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.badap.*
+import com.badap.adapters.AlbumRecyclerAdapter
+import com.badap.adapters.ArtistRecyclerAdapter
+import com.badap.adapters.SongRecyclerAdapter
 import com.badap.fragments.albums.AlbumsFragment
+import com.badap.fragments.albums.AllAlbumsFragment
+import com.badap.fragments.artists.ArtistsFragment
 import com.badap.fragments.songs.AlbumSongsFragment
+import com.badap.fragments.songs.AllSongsFragment
 import com.badap.fragments.songs.SongFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class GeneralUtility {
-    fun goToAlbumSongsFragment(album: Album?, context: FragmentActivity?) {
-        val singleAlbumFragment = AlbumSongsFragment()
+    fun goToAlbumSongsFragment(album: Album?, context: FragmentActivity?, viewFab: FloatingActionButton) {
+        val singleAlbumFragment = AlbumSongsFragment(viewFab)
         val bundle = Bundle()
         album?.let {
             bundle.putString("albumArt", it.albumArt.toString())
@@ -28,7 +36,6 @@ class GeneralUtility {
             bundle.putString("albumName", it.albumName)
         }
         singleAlbumFragment.arguments = bundle
-
         context?.supportFragmentManager
             ?.beginTransaction()
             ?.replace(R.id.main_container, singleAlbumFragment)
@@ -36,8 +43,8 @@ class GeneralUtility {
             ?.commit()
     }
 
-    fun goToAlbumListFragment(artist: Artist?, context: FragmentActivity?) {
-        val albumsFragment = AlbumsFragment()
+    fun goToAlbumListFragment(artist: Artist?, context: FragmentActivity?, viewFab: FloatingActionButton) {
+        val albumsFragment = AlbumsFragment(viewFab)
         val bundle = Bundle()
         artist?.let {
             bundle.putLong("artistId", it.artistIdLong)

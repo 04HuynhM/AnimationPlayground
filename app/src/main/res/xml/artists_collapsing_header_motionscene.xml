@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetStart="@id/collapsing_artist_header_start"
+        motion:constraintSetEnd="@id/collapsing_artist_header_end">
+        <OnSwipe
+            motion:dragDirection="dragUp"
+            motion:touchAnchorId="@id/artists_recycler"
+            motion:touchAnchorSide="top" />
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="65"
+                motion:motionTarget="@id/artists_title" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="65"
+                motion:motionTarget="@id/artists_play_button" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="65"
+                motion:motionTarget="@id/artists_shuffle_button" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="20"
+                motion:motionTarget="@id/artists_back_button" />
+        </KeyFrameSet>
+
+    </Transition>
+
+    <ConstraintSet android:id="@+id/collapsing_artist_header_start">
+        <Constraint android:id="@+id/artists_back_button">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/standard_button_height"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintHorizontal_bias="0.0"
+                motion:layout_constraintStart_toStartOf="parent"
+                motion:layout_constraintTop_toTopOf="parent" />
+            <PropertySet android:alpha="1"/>
+            <Motion motion:transitionEasing="linear"/>
+        </Constraint>
+
+        <Constraint android:id="@+id/artists_title">
+            <PropertySet android:alpha="1"/>
+            <Motion motion:transitionEasing="linear"/>
+        </Constraint>
+
+        <Constraint android:id="@+id/artists_play_button">
+            <PropertySet android:alpha="1"/>
+            <Motion motion:transitionEasing="linear"/>
+        </Constraint>
+
+        <Constraint android:id="@+id/artists_shuffle_button">
+            <PropertySet android:alpha="1"/>
+            <Motion motion:transitionEasing="linear"/>
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/artists_recycler_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            motion:layout_constraintGuide_percent="0.28">
+            <Motion motion:transitionEasing="linear"/>
+        </Constraint>
+
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/collapsing_artist_header_end">
+
+        <Constraint android:id="@+id/artists_back_button">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/standard_button_height"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintHorizontal_bias="1.0"
+                motion:layout_constraintStart_toStartOf="parent"
+                motion:layout_constraintTop_toTopOf="parent" />
+            <PropertySet android:alpha="0"/>
+            <Motion motion:transitionEasing="linear"/>
+        </Constraint>
+
+        <Constraint android:id="@+id/artists_title">
+            <PropertySet android:alpha="0"/>
+            <Motion motion:transitionEasing="linear"/>
+        </Constraint>
+
+        <Constraint android:id="@+id/artists_play_button" >
+            <PropertySet android:alpha="0"/>
+            <Motion motion:transitionEasing="linear"/>
+        </Constraint>
+
+        <Constraint android:id="@+id/artists_shuffle_button">
+            <PropertySet android:alpha="0" />
+            <Motion motion:transitionEasing="linear"/>
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/artists_recycler_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            motion:layout_constraintGuide_percent="0">
+            <Motion motion:transitionEasing="linear"/>
+        </Constraint>
+    </ConstraintSet>
+</MotionScene>

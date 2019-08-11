@@ -38,4 +38,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.writingminds:FFmpegAndroid:0.3.2'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.11'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'com.github.droid-it:Flat-Radio-Group:master'
 }
