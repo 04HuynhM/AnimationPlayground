@@ -12,11 +12,13 @@ import com.badap.adapters.viewHolders.gridItems.GenericGridItemViewHolder
 import com.badap.adapters.viewHolders.rows.LargeSongRow
 import com.badap.adapters.viewHolders.rows.MediumSongRow
 import com.badap.adapters.viewHolders.rows.SmallSongRow
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class SongRecyclerAdapter(private val songList: ArrayList<Song>,
                           private val activity: FragmentActivity,
                           private val screenWidth: Int,
-                          private var currentViewType: Int)
+                          private var currentViewType: Int,
+                          private val viewFab: FloatingActionButton)
     : ListAdapter<Song, RecyclerView.ViewHolder>(ListItemCallback()) {
 
     class ListItemCallback : DiffUtil.ItemCallback<Song>() {
@@ -48,19 +50,19 @@ class SongRecyclerAdapter(private val songList: ArrayList<Song>,
             ViewType.LARGE_GRID.ordinal -> {
                 val view = generalUtil.getInflatedView(parent, R.layout.generic_grid_item)
                 view.layoutParams.height = (screenWidth / 2) - 16
-                return GenericGridItemViewHolder(view, activity, (screenWidth / 2) - 16)
+                return GenericGridItemViewHolder(view, activity, (screenWidth / 2) - 16, viewFab)
             }
             // Inflate layout for Medium Grid
             ViewType.MEDIUM_GRID.ordinal -> {
                 val view = generalUtil.getInflatedView(parent, R.layout.generic_grid_item)
                 view.layoutParams.height = (screenWidth / 3) - 16
-                return GenericGridItemViewHolder(view, activity, (screenWidth / 3) - 16)
+                return GenericGridItemViewHolder(view, activity, (screenWidth / 3) - 16, viewFab)
             }
             // Inflate layout for Small Grid
             ViewType.SMALL_GRID.ordinal -> {
                 val view = generalUtil.getInflatedView(parent, R.layout.generic_grid_item)
                 view.layoutParams.height = (screenWidth / 4) - 16
-                return GenericGridItemViewHolder(view, activity, (screenWidth / 4) - 16)
+                return GenericGridItemViewHolder(view, activity, (screenWidth / 4) - 16, viewFab)
             }
             // Inflate layout for Large Row
             ViewType.LARGE_ROW.ordinal -> {

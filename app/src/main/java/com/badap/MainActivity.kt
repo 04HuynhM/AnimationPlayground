@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -13,6 +12,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import com.badap.fragments.MenuFragment
+import com.badap.fragments.BottomSheetViewModeDialog
+import com.badap.fragments.albums.AlbumsFragment
+import com.badap.fragments.albums.AllAlbumsFragment
+import com.badap.fragments.artists.ArtistsFragment
+import com.badap.fragments.songs.AlbumSongsFragment
+import com.badap.fragments.songs.AllSongsFragment
 import com.badap.utilities.GeneralUtility
 import com.badap.utilities.MediaStoreUtility
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg
@@ -37,9 +42,9 @@ class MainActivity : AppCompatActivity() {
 
     private val PERMISSIONS_REQUEST_CODE = 101
     private var isFabOpen = false
-    lateinit var optionsFab: FloatingActionButton
-    lateinit var rescanFab: FloatingActionButton
-    lateinit var viewTypeFab: FloatingActionButton
+    private lateinit var optionsFab: FloatingActionButton
+    private lateinit var rescanFab: FloatingActionButton
+    private lateinit var viewTypeFab: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,29 +67,35 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE)
+        rescanFab.setOnClickListener {
+            Toast.makeText(this, "Rescan baby", Toast.LENGTH_LONG).show()
+        }
+
+        val preferences = getSharedPreferences("prefs", Context.MODE_PRIVATE)
         val screenSize = generalUtil.getScreenSize(this)
 
-        if (!prefs.contains("screen_width") || !prefs.contains("screen_height")) {
-            prefs.edit {
+        if (!preferences.contains("screen_width") || !preferences.contains("screen_height")) {
+            preferences.edit {
                 putInt("screen_width", screenSize.x)
                 putInt("screen_height", screenSize.y)
             }
         }
         getCachedLibrary()
 
-        val menuFragment = MenuFragment()
+        val menuFragment = MenuFragment(viewTypeFab)
         supportFragmentManager.beginTransaction().replace(R.id.main_container, menuFragment).commit()
     }
 
     private fun openFabMenu() {
         isFabOpen = true
+        optionsFab.animate().rotation(90f)
         rescanFab.animate().translationY(resources.getDimension(R.dimen.standard_62))
         viewTypeFab.animate().translationY(resources.getDimension(R.dimen.standard_115))
     }
 
     private fun closeFabMenu() {
         isFabOpen = false
+        optionsFab.animate().rotation(-90f)
         rescanFab.animate().translationY(0f)
         viewTypeFab.animate().translationY(0f)
     }
@@ -133,16 +144,11 @@ class MainActivity : AppCompatActivity() {
         return File(indexFolder, "data.ser")
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_viewtype_options, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
     private val mOnNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.bottom_navigator_music -> {
-                    loadFragment(MenuFragment())
+                    loadFragment(MenuFragment(viewTypeFab))
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.bottom_navigator_profile -> {
@@ -251,5 +257,4 @@ class MainActivity : AppCompatActivity() {
             Log.e("FFMpeg", "FFMpeg not supported on device")
         }
     }
-
 }

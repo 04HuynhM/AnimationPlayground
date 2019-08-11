@@ -13,7 +13,7 @@
         app:layout_constraintBottom_toTopOf="@+id/main_navigator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_navigator"
@@ -49,7 +49,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/fab_options_button"
         app:layout_constraintEnd_toEndOf="@+id/fab_options_button"
         app:layout_constraintStart_toStartOf="@+id/fab_options_button"
-        app:srcCompat="@drawable/ic_view_list_grey_24dp" />
+        app:srcCompat="@drawable/ic_view_list_black_24dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_options_button"

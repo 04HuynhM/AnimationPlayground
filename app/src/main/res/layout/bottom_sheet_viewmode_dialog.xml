@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet_viewmode_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="auto"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:context=".fragments.BottomSheetViewModeDialog">
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="2dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:alpha="0.5"
+        android:background="@color/black_semi_transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/row_radio_group"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/grid_radio_group"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/grid_radio_group"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/divider4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_view_module_grey_24dp"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="View as grid"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/large_grid_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Large Grid" />
+
+        <RadioButton
+            android:id="@+id/medium_grid_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium Grid" />
+
+        <RadioButton
+            android:id="@+id/small_grid_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Small Grid" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/row_radio_group"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="0.5"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/divider4"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_view_list_grey_24dp"
+            android:drawablePadding="8dp"
+            android:gravity="end"
+            android:text="View as rows"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/large_row_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Large Row" />
+
+        <RadioButton
+            android:id="@+id/medium_row_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium Row" />
+
+        <RadioButton
+            android:id="@+id/small_row_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Small Row" />
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

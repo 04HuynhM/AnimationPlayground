@@ -14,9 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.badap.MainActivity
 import com.badap.R
 import com.badap.adapters.AlbumRecyclerAdapter
+import com.badap.fragments.BottomSheetViewModeDialog
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class AllAlbumsFragment : Fragment() {
+class AllAlbumsFragment(val viewFab: FloatingActionButton) : Fragment() {
 
     lateinit var adapter: AlbumRecyclerAdapter
     lateinit var prefs: SharedPreferences
@@ -25,10 +27,7 @@ class AllAlbumsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_albums, container, false)
-        setHasOptionsMenu(true)
-        requireActivity().title = "Albums"
-        return view
+        return inflater.inflate(R.layout.fragment_albums, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,7 +41,7 @@ class AllAlbumsFragment : Fragment() {
         val screenWidth = prefs.getInt("screen_width", -1)
 
         MainActivity.indexedAlbums?.let {
-            adapter = AlbumRecyclerAdapter(it, requireActivity(), screenWidth, initialViewMode)
+            adapter = AlbumRecyclerAdapter(it, requireActivity(), screenWidth, initialViewMode, viewFab)
             recyclerView.adapter = adapter
         }
 
@@ -61,37 +60,14 @@ class AllAlbumsFragment : Fragment() {
                 }
             }
         }
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.update_library_index -> {
-                val activity = requireActivity() as MainActivity
-                activity.initializeLibraryArrays()
-            }
-            R.id.large_grid_option -> {
-                setViewType(1)
-            }
-            R.id.large_row_option -> {
-                setViewType(2)
-            }
-            R.id.medium_grid_option -> {
-                setViewType(4)
-            }
-            R.id.medium_row_option -> {
-                setViewType(3)
-            }
-            R.id.small_grid_option -> {
-                setViewType(5)
-            }
-            R.id.small_row_option -> {
-                setViewType(6)
-            }
+        viewFab.setOnClickListener {
+            val viewDialog = BottomSheetViewModeDialog(this, viewFab)
+            viewDialog.show(requireActivity().supportFragmentManager, "viewmode_dialog_albums")
         }
-        return super.onOptionsItemSelected(item)
     }
 
-    private fun setViewType(viewType: Int) {
+    fun setViewType(viewType: Int) {
         adapter.setViewType(viewType)
         adapter.notifyItemRangeChanged(0, adapter.itemCount)
         prefs.edit { putInt("view_mode", viewType)?.apply() }
