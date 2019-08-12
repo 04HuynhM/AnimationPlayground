@@ -17,8 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class AlbumRecyclerAdapter(private val albumList: ArrayList<Album>,
                            private val activity: FragmentActivity,
                            private val screenWidth: Int,
-                           private var currentViewType: Int,
-                           private val viewFab: FloatingActionButton)
+                           private var currentViewType: Int)
     : ListAdapter<Album, RecyclerView.ViewHolder>(ListItemCallback()) {
 
     class ListItemCallback : DiffUtil.ItemCallback<Album>() {
@@ -50,37 +49,37 @@ class AlbumRecyclerAdapter(private val albumList: ArrayList<Album>,
             ViewType.LARGE_GRID.ordinal -> {
                 val view = generalUtil.getInflatedView(parent, R.layout.generic_grid_item)
                 view.layoutParams.height = (screenWidth / 2) - 16
-                return GenericGridItemViewHolder(view, activity, (screenWidth / 2) - 16, viewFab)
+                return GenericGridItemViewHolder(view, activity, (screenWidth / 2) - 16)
             }
             // Inflate layout for Medium Grid
             ViewType.MEDIUM_GRID.ordinal -> {
                 val view = generalUtil.getInflatedView(parent, R.layout.generic_grid_item)
                 view.layoutParams.height = (screenWidth / 3) - 16
-                return GenericGridItemViewHolder(view, activity, (screenWidth / 3) - 16, viewFab)
+                return GenericGridItemViewHolder(view, activity, (screenWidth / 3) - 16)
             }
             // Inflate layout for Small Grid
             ViewType.SMALL_GRID.ordinal -> {
                 val view = generalUtil.getInflatedView(parent, R.layout.generic_grid_item)
                 view.layoutParams.height = (screenWidth / 4) - 16
-                return GenericGridItemViewHolder(view, activity, (screenWidth / 4) - 16, viewFab)
+                return GenericGridItemViewHolder(view, activity, (screenWidth / 4) - 16)
             }
             // Inflate layout for Large Row
             ViewType.LARGE_ROW.ordinal -> {
                 val view = generalUtil.getInflatedView(parent, R.layout.large_album_item_row)
                 view.layoutParams.height = (screenWidth / 2) - 120
-                return LargeAlbumRow(view, activity, viewFab)
+                return LargeAlbumRow(view, activity)
             }
             // Inflate layout for Medium Row
             ViewType.MEDIUM_ROW.ordinal -> {
                 val view = generalUtil.getInflatedView(parent, R.layout.medium_album_row)
                 view.layoutParams.height = (screenWidth / 3) - 80
-                return MediumAlbumRow(view, activity, viewFab)
+                return MediumAlbumRow(view, activity)
             }
             // Inflate layout for Small Row
             else -> {
                 val view = generalUtil.getInflatedView(parent, R.layout.small_album_row)
                 view.layoutParams.height = (screenWidth / 4) - 80
-                return SmallAlbumRow(view, activity, viewFab)
+                return SmallAlbumRow(view, activity)
             }
         }
     }

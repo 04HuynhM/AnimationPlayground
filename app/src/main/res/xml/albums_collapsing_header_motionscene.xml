@@ -33,7 +33,7 @@
     </Transition>
 
     <ConstraintSet android:id="@+id/collapsing_album_header_start">
-        <Constraint android:id="@+id/albums_back_button">
+        <Constraint android:id="@id/albums_back_button">
             <Layout
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/standard_button_height"
@@ -50,23 +50,23 @@
             <Motion motion:transitionEasing="linear"/>
         </Constraint>
 
-        <Constraint android:id="@+id/albums_title">
+        <Constraint android:id="@id/albums_title">
             <PropertySet android:alpha="1"/>
             <Motion motion:transitionEasing="linear"/>
         </Constraint>
 
-        <Constraint android:id="@+id/albums_play_button">
+        <Constraint android:id="@id/albums_play_button">
             <PropertySet android:alpha="1"/>
             <Motion motion:transitionEasing="linear"/>
         </Constraint>
 
-        <Constraint android:id="@+id/albums_shuffle_button">
+        <Constraint android:id="@id/albums_shuffle_button">
             <PropertySet android:alpha="1"/>
             <Motion motion:transitionEasing="linear"/>
         </Constraint>
 
         <Constraint
-            android:id="@+id/album_recycler_guideline"
+            android:id="@id/album_recycler_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -76,7 +76,7 @@
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/collapsing_album_header_end">
-        <Constraint android:id="@+id/albums_back_button">
+        <Constraint android:id="@id/albums_back_button">
             <Layout
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/standard_button_height"
@@ -91,23 +91,23 @@
             <Motion motion:transitionEasing="decelerate"/>
         </Constraint>
 
-        <Constraint android:id="@+id/albums_title">
+        <Constraint android:id="@id/albums_title">
             <PropertySet android:alpha="0"/>
             <Motion motion:transitionEasing="linear"/>
         </Constraint>
 
-        <Constraint android:id="@+id/albums_play_button" >
+        <Constraint android:id="@id/albums_play_button" >
             <PropertySet android:alpha="0"/>
             <Motion motion:transitionEasing="linear"/>
         </Constraint>
 
-        <Constraint android:id="@+id/albums_shuffle_button">
+        <Constraint android:id="@id/albums_shuffle_button">
             <PropertySet android:alpha="0" />
             <Motion motion:transitionEasing="linear"/>
         </Constraint>
 
         <Constraint
-            android:id="@+id/album_recycler_guideline"
+            android:id="@id/album_recycler_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

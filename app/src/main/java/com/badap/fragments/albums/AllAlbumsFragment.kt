@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioGroup
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,7 +19,7 @@ import com.badap.fragments.BottomSheetViewModeDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class AllAlbumsFragment(val viewFab: FloatingActionButton) : Fragment() {
+class AllAlbumsFragment : Fragment() {
 
     lateinit var adapter: AlbumRecyclerAdapter
     lateinit var prefs: SharedPreferences
@@ -41,8 +42,33 @@ class AllAlbumsFragment(val viewFab: FloatingActionButton) : Fragment() {
         val screenWidth = prefs.getInt("screen_width", -1)
 
         MainActivity.indexedAlbums?.let {
-            adapter = AlbumRecyclerAdapter(it, requireActivity(), screenWidth, initialViewMode, viewFab)
+            adapter = AlbumRecyclerAdapter(it, requireActivity(), screenWidth, initialViewMode)
             recyclerView.adapter = adapter
+        }
+
+        val viewTypeRadioGroup: RadioGroup = view.findViewById(R.id.albums_drawer_viewtype_radiogroup)
+
+        viewTypeRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.albums_drawer_row_large -> {
+                    setViewType(2)
+                }
+                R.id.albums_drawer_row_medium -> {
+                    setViewType(3)
+                }
+                R.id.albums_drawer_row_small -> {
+                    setViewType(6)
+                }
+                R.id.albums_drawer_grid_large -> {
+                    setViewType(1)
+                }
+                R.id.albums_drawer_grid_medium -> {
+                    setViewType(4)
+                }
+                else -> {
+                    setViewType(5)
+                }
+            }
         }
 
         recyclerView.layoutManager = layoutManager
@@ -59,11 +85,6 @@ class AllAlbumsFragment(val viewFab: FloatingActionButton) : Fragment() {
                     else -> -1
                 }
             }
-        }
-
-        viewFab.setOnClickListener {
-            val viewDialog = BottomSheetViewModeDialog(this, viewFab)
-            viewDialog.show(requireActivity().supportFragmentManager, "viewmode_dialog_albums")
         }
     }
 

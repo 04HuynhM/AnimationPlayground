@@ -27,8 +27,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class GeneralUtility {
-    fun goToAlbumSongsFragment(album: Album?, context: FragmentActivity?, viewFab: FloatingActionButton) {
-        val singleAlbumFragment = AlbumSongsFragment(viewFab)
+    fun goToAlbumSongsFragment(album: Album?, context: FragmentActivity?) {
+        val singleAlbumFragment = AlbumSongsFragment()
         val bundle = Bundle()
         album?.let {
             bundle.putString("albumArt", it.albumArt.toString())
@@ -43,8 +43,8 @@ class GeneralUtility {
             ?.commit()
     }
 
-    fun goToAlbumListFragment(artist: Artist?, context: FragmentActivity?, viewFab: FloatingActionButton) {
-        val albumsFragment = AlbumsFragment(viewFab)
+    fun goToAlbumListFragment(artist: Artist?, context: FragmentActivity?) {
+        val albumsFragment = AlbumsFragment()
         val bundle = Bundle()
         artist?.let {
             bundle.putLong("artistId", it.artistIdLong)
