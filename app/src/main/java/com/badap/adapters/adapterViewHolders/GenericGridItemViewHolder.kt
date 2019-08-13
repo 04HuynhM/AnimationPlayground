@@ -1,4 +1,4 @@
-package com.badap.adapters.viewHolders.gridItems
+package com.badap.adapters.adapterViewHolders
 
 import android.net.Uri
 import android.view.View
@@ -7,10 +7,10 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.badap.Album
+import com.badap.AlbumEntity
 import com.badap.MainActivity.Companion.generalUtil
 import com.badap.R
-import com.badap.Song
+import com.badap.SongEntity
 
 class GenericGridItemViewHolder(view: View,
                                 private var activity: FragmentActivity,
@@ -32,10 +32,10 @@ class GenericGridItemViewHolder(view: View,
 
     override fun onClick(p0: View?) {
         when(val data = this.data) {
-            is Album -> {
+            is AlbumEntity -> {
                 generalUtil.goToAlbumSongsFragment(data, activity)
             }
-            is Song -> {
+            is SongEntity -> {
                 generalUtil.goToSongFragment(data, activity)
             }
         }
@@ -45,22 +45,22 @@ class GenericGridItemViewHolder(view: View,
         val colorId = activity.getColor(R.color.timecode_shadow)
         this.data = data
         when(data) {
-            is Album -> {
-                val spannableName = generalUtil.setSpannableString(data.albumName, colorId)
+            is AlbumEntity -> {
+                val spannableName = generalUtil.setSpannableString(data.name, colorId)
                 val spannableArtist = generalUtil.setSpannableString(data.artist, colorId)
                 mDetailView?.text = spannableArtist
                 mTitleView?.text = spannableName
                 mImageView?.let {
-                    generalUtil.insertImageFromUri(Uri.parse(data.albumArt), mImageView!!, activity, width)
+                    generalUtil.insertImageFromUri(Uri.parse(data.albumArtUriString), mImageView!!, activity, width)
                 }
             }
-            is Song -> {
+            is SongEntity -> {
                 val spannableName = generalUtil.setSpannableString(data.title, colorId)
                 val spannableAlbum = generalUtil.setSpannableString(data.album, colorId)
                 mDetailView?.text = spannableAlbum
                 mTitleView?.text = spannableName
                 mImageView?.let {
-                    generalUtil.insertImageFromUri(Uri.parse(data.albumArtUri), mImageView!!, activity, width)
+                    generalUtil.insertImageFromUri(Uri.parse(data.albumArtUriString), mImageView!!, activity, width)
                 }
             }
         }

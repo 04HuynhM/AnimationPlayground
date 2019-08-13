@@ -36,9 +36,9 @@ class AlbumSongsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val bundle: Bundle? = arguments
-        requireActivity().title = bundle?.get("albumName").toString()
+        requireActivity().title = bundle?.get("name").toString()
         val albumId = bundle?.get("albumId").toString()
-        val albumArtUriString = bundle?.get("albumArt").toString()
+        val albumArtUriString = bundle?.get("albumArtUriString").toString()
         val albumArtUri = Uri.parse(albumArtUriString)
 
         val albumArtImageView = view.findViewById<ImageView>(R.id.single_album_art)

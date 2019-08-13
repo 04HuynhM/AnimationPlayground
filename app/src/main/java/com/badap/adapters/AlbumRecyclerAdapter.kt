@@ -5,26 +5,26 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.badap.Album
+import com.badap.AlbumEntity
 import com.badap.MainActivity.Companion.generalUtil
 import com.badap.R
-import com.badap.adapters.viewHolders.gridItems.GenericGridItemViewHolder
-import com.badap.adapters.viewHolders.rows.LargeAlbumRow
-import com.badap.adapters.viewHolders.rows.MediumAlbumRow
-import com.badap.adapters.viewHolders.rows.SmallAlbumRow
+import com.badap.adapters.adapterViewHolders.GenericGridItemViewHolder
+import com.badap.adapters.adapterViewHolders.LargeAlbumRow
+import com.badap.adapters.adapterViewHolders.MediumAlbumRow
+import com.badap.adapters.adapterViewHolders.SmallAlbumRow
 
-class AlbumRecyclerAdapter(private val albumList: ArrayList<Album>,
+class AlbumRecyclerAdapter(private val albumList: ArrayList<AlbumEntity>,
                            private val activity: FragmentActivity,
                            private val screenWidth: Int,
                            private var currentViewType: Int)
-    : ListAdapter<Album, RecyclerView.ViewHolder>(ListItemCallback()) {
+    : ListAdapter<AlbumEntity, RecyclerView.ViewHolder>(ListItemCallback()) {
 
-    class ListItemCallback : DiffUtil.ItemCallback<Album>() {
-        override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean {
+    class ListItemCallback : DiffUtil.ItemCallback<AlbumEntity>() {
+        override fun areItemsTheSame(oldItem: AlbumEntity, newItem: AlbumEntity): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean {
+        override fun areContentsTheSame(oldItem: AlbumEntity, newItem: AlbumEntity): Boolean {
             return oldItem.albumId == newItem.albumId
         }
     }
@@ -48,19 +48,31 @@ class AlbumRecyclerAdapter(private val albumList: ArrayList<Album>,
             ViewType.LARGE_GRID.ordinal -> {
                 val view = generalUtil.getInflatedView(parent, R.layout.generic_grid_item)
                 view.layoutParams.height = (screenWidth / 2) - 16
-                return GenericGridItemViewHolder(view, activity, (screenWidth / 2) - 16)
+                return GenericGridItemViewHolder(
+                    view,
+                    activity,
+                    (screenWidth / 2) - 16
+                )
             }
             // Inflate layout for Medium Grid
             ViewType.MEDIUM_GRID.ordinal -> {
                 val view = generalUtil.getInflatedView(parent, R.layout.generic_grid_item)
                 view.layoutParams.height = (screenWidth / 3) - 16
-                return GenericGridItemViewHolder(view, activity, (screenWidth / 3) - 16)
+                return GenericGridItemViewHolder(
+                    view,
+                    activity,
+                    (screenWidth / 3) - 16
+                )
             }
             // Inflate layout for Small Grid
             ViewType.SMALL_GRID.ordinal -> {
                 val view = generalUtil.getInflatedView(parent, R.layout.generic_grid_item)
                 view.layoutParams.height = (screenWidth / 4) - 16
-                return GenericGridItemViewHolder(view, activity, (screenWidth / 4) - 16)
+                return GenericGridItemViewHolder(
+                    view,
+                    activity,
+                    (screenWidth / 4) - 16
+                )
             }
             // Inflate layout for Large Row
             ViewType.LARGE_ROW.ordinal -> {

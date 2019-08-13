@@ -1,14 +1,18 @@
 package com.badap
 
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
 import com.google.gson.Gson
 import java.io.Serializable
 
-data class Artist(val artistId: String,
-                  val artistName: String,
-                  val artistNumberOfTracks: String,
-                  val artistNumberOfAlbums: String,
-                  val artistIdLong: Long,
-                  val firstAlbumArt: String?) : Serializable {
+@Entity(tableName = "artists_table")
+data class ArtistEntity(@PrimaryKey val artistId: Long,
+                        val name: String,
+                        val numberOfTracks: String,
+                        val numberOfAlbums: String,
+                        val artistIdLong: Long,
+                        val firstAlbumArt: String?) : Serializable {
 
     fun toJson() : String {
         val jsonString = Gson().toJson(this)
@@ -16,11 +20,17 @@ data class Artist(val artistId: String,
     }
 }
 
-data class Album(val albumId: String,
-                  val albumName: String,
-                  val artist: String,
-                  val numOfSongs: String,
-                  val albumArt: String?) : Serializable {
+@Entity(tableName = "albums_table",
+        foreignKeys = [ForeignKey(entity = ArtistEntity::class,
+                                  parentColumns = arrayOf("artistId"),
+                                  childColumns = arrayOf("artistId"),
+                                  onDelete = ForeignKey.CASCADE)])
+data class AlbumEntity(@PrimaryKey val albumId: Long,
+                       val name: String,
+                       val artist: String,
+                       val artistId: Long,
+                       val numOfSongs: Int,
+                       val albumArtUriString: String?) : Serializable {
 
     fun toJson() : String {
         val jsonString = Gson().toJson(this)
@@ -28,18 +38,27 @@ data class Album(val albumId: String,
     }
 }
 
-data class Song(val songId: Long,
-                val name: String,
-                val title: String,
-                val trackNumber: String,
-                val album: String,
-                val albumId: Long,
-                val artist: String,
-                val artistId: String,
-                val path: String,
-                val duration: String,
-                val rawDuration: String,
-                val albumArtUri: String?) : Serializable {
+@Entity(tableName = "songs_table",
+        foreignKeys = arrayOf(ForeignKey(entity = AlbumEntity::class,
+                                  parentColumns = arrayOf("albumId"),
+                                  childColumns = arrayOf("albumId"),
+                                  onDelete = ForeignKey.CASCADE),
+                              ForeignKey(entity = ArtistEntity::class,
+                                  parentColumns = arrayOf("artistId"),
+                                  childColumns = arrayOf("artistId"),
+                                  onDelete = ForeignKey.CASCADE)))
+data class SongEntity(@PrimaryKey val songId: Long,
+                      val name: String,
+                      val title: String,
+                      val trackNumber: String,
+                      val album: String,
+                      val albumId: Long,
+                      val artist: String,
+                      val artistId: Long,
+                      val path: String,
+                      val duration: String,
+                      val rawDuration: String,
+                      val albumArtUriString: String?) : Serializable {
 
     fun toJson() : String {
         val jsonString = Gson().toJson(this)

@@ -1,4 +1,4 @@
-package com.badap.adapters.viewHolders.rows
+package com.badap.adapters.adapterViewHolders
 
 import android.net.Uri
 import android.view.View
@@ -8,11 +8,11 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.badap.MainActivity.Companion.generalUtil
 import com.badap.R
-import com.badap.Song
+import com.badap.SongEntity
 
 class LargeSongRow(private var view: View, private var mContext: FragmentActivity)
     : RecyclerView.ViewHolder(view), View.OnClickListener {
-    private var song: Song? = null
+    private var song: SongEntity? = null
     private var mSongNameView : TextView? = null
     private var mArtistName: TextView? = null
     private var mAlbumName: TextView? = null
@@ -32,7 +32,7 @@ class LargeSongRow(private var view: View, private var mContext: FragmentActivit
         generalUtil.goToSongFragment(song, mContext)
     }
 
-    fun bindViewHolder(song: Song, width: Int) {
+    fun bindViewHolder(song: SongEntity, width: Int) {
         this.song = song
         mSongNameView?.text = song.title
         mArtistName?.text = song.artist
@@ -40,7 +40,7 @@ class LargeSongRow(private var view: View, private var mContext: FragmentActivit
         mDuration?.text = song.duration
         mAlbumArt?.let {
             it.layoutParams.width = width
-            generalUtil.insertImageFromUri(Uri.parse(song.albumArtUri), it, mContext, width)
+            generalUtil.insertImageFromUri(Uri.parse(song.albumArtUriString), it, mContext, width)
         }
     }
 }
@@ -49,7 +49,7 @@ class MediumSongRow(v: View, private val mContext: FragmentActivity)
     : RecyclerView.ViewHolder(v), View.OnClickListener {
 
     private var view: View = v
-    private var song: Song? = null
+    private var song: SongEntity? = null
     private var mSongNameView : TextView? = null
     private var mArtistName: TextView? = null
     private var mDuration: TextView? = null
@@ -67,14 +67,14 @@ class MediumSongRow(v: View, private val mContext: FragmentActivity)
         generalUtil.goToSongFragment(song, mContext)
     }
 
-    fun bindViewHolder(song: Song, width: Int) {
+    fun bindViewHolder(song: SongEntity, width: Int) {
         this.song = song
         mSongNameView?.text = song.title
         mArtistName?.text = "${song.artist} | ${song.album}"
         mDuration?.text = song.duration
         mAlbumArt?.let {
             it.layoutParams.width = width
-            generalUtil.insertImageFromUri(Uri.parse(song.albumArtUri), it, mContext, width)
+            generalUtil.insertImageFromUri(Uri.parse(song.albumArtUriString), it, mContext, width)
         }
     }
 }
@@ -83,7 +83,7 @@ class SmallSongRow(view: View,
                    private var mContext: FragmentActivity)
     : RecyclerView.ViewHolder(view), View.OnClickListener {
 
-    private var song: Song? = null
+    private var song: SongEntity? = null
     private var mSongNameView : TextView? = null
     private var mArtistAlbumText: TextView? = null
     private var mDuration: TextView? = null
@@ -101,14 +101,14 @@ class SmallSongRow(view: View,
         generalUtil.goToSongFragment(song, mContext)
     }
 
-    fun bindViewHolder(song: Song, width: Int) {
+    fun bindViewHolder(song: SongEntity, width: Int) {
         this.song = song
         mSongNameView?.text = song.title
         mArtistAlbumText?.text = "${song.artist} | ${song.album}"
         mDuration?.text = song.duration
         mAlbumArt?.let {
             it.layoutParams.width = width
-            generalUtil.insertImageFromUri(Uri.parse(song.albumArtUri), it, mContext, width)
+            generalUtil.insertImageFromUri(Uri.parse(song.albumArtUriString), it, mContext, width)
         }
     }
 }

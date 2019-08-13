@@ -24,9 +24,9 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        var indexedArtists: ArrayList<Artist>? = null
-        var indexedAlbums: ArrayList<Album>? = null
-        var indexedSongs: ArrayList<Song>? = null
+        var indexedArtists: ArrayList<ArtistEntity>? = null
+        var indexedAlbums: ArrayList<AlbumEntity>? = null
+        var indexedSongs: ArrayList<SongEntity>? = null
         var lastUpdated: Date? = null
         val mediaStoreUtil = MediaStoreUtility()
         val generalUtil = GeneralUtility()
@@ -52,54 +52,9 @@ class MainActivity : AppCompatActivity() {
                 putInt("screen_height", screenSize.y)
             }
         }
-        getCachedLibrary()
 
         val menuFragment = MenuFragment()
         supportFragmentManager.beginTransaction().replace(R.id.main_container, menuFragment).commit()
-    }
-
-    private fun cacheCurrentLibrary() {
-        val filePath = getCachedDirectory()
-
-        val fos = FileOutputStream(filePath)
-        val oos = ObjectOutputStream(fos)
-
-        val dataArray = arrayOf(indexedArtists, indexedAlbums, indexedSongs)
-        oos.writeObject(dataArray)
-    }
-
-    private fun getCachedLibrary() {
-        val dataFile = getCachedDirectory()
-
-        if (dataFile.exists()) {
-            val fis = FileInputStream(dataFile)
-            val ois = ObjectInputStream(fis)
-
-            val dataArray = ois.readObject() as Array<ArrayList<*>>
-            indexedArtists = dataArray[0] as ArrayList<Artist>
-            indexedAlbums = dataArray[1] as ArrayList<Album>
-            indexedSongs = dataArray[2] as ArrayList<Song>
-        } else {
-            initializeLibraryArrays()
-        }
-    }
-
-    private fun initializeLibraryArrays() {
-        val mediaHelper = MediaStoreUtility()
-        indexedAlbums = mediaHelper.getAllAlbums(this)
-        indexedArtists = mediaHelper.getAllArtists(this)
-        indexedSongs = mediaHelper.getAllSongs(this)
-        lastUpdated = Date()
-
-        cacheCurrentLibrary()
-    }
-
-    private fun getCachedDirectory() : File{
-        val indexFolder = File(this.cacheDir.absolutePath + "/library_index")
-        if(!indexFolder.exists()) {
-            indexFolder.mkdir()
-        }
-        return File(indexFolder, "data.ser")
     }
 
     private val mOnNavigationItemSelectedListener =

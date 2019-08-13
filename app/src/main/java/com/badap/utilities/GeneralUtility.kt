@@ -19,13 +19,13 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 class GeneralUtility {
-    fun goToAlbumSongsFragment(album: Album?, context: FragmentActivity?) {
+    fun goToAlbumSongsFragment(album: AlbumEntity?, context: FragmentActivity?) {
         val singleAlbumFragment = AlbumSongsFragment()
         val bundle = Bundle()
         album?.let {
-            bundle.putString("albumArt", it.albumArt.toString())
-            bundle.putString("albumId", it.albumId)
-            bundle.putString("albumName", it.albumName)
+            bundle.putString("albumArtUriString", it.albumArtUriString.toString())
+            bundle.putLong("albumId", it.albumId)
+            bundle.putString("name", it.name)
         }
         singleAlbumFragment.arguments = bundle
         context?.supportFragmentManager
@@ -35,12 +35,12 @@ class GeneralUtility {
             ?.commit()
     }
 
-    fun goToAlbumListFragment(artist: Artist?, context: FragmentActivity?) {
+    fun goToAlbumListFragment(artist: ArtistEntity?, context: FragmentActivity?) {
         val albumsFragment = AlbumsFragment()
         val bundle = Bundle()
         artist?.let {
             bundle.putLong("artistId", it.artistIdLong)
-            bundle.putString("artistName", it.artistName)
+            bundle.putString("name", it.name)
         }
         albumsFragment.arguments = bundle
         context?.supportFragmentManager
@@ -50,7 +50,7 @@ class GeneralUtility {
             ?.commit()
     }
 
-    fun goToSongFragment(song: Song?, context: FragmentActivity?) {
+    fun goToSongFragment(song: SongEntity?, context: FragmentActivity?) {
         val playerFragment = PlayerFragment()
         val bundle = Bundle()
         bundle.putString("songJson", song?.toJson())

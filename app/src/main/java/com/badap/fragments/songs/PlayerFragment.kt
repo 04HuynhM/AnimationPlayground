@@ -14,7 +14,7 @@ import android.widget.TextView
 import com.badap.MainActivity
 
 import com.badap.R
-import com.badap.Song
+import com.badap.SongEntity
 import com.google.gson.Gson
 
 
@@ -47,8 +47,8 @@ class PlayerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews(view)
         val bundle = arguments
-        val song = Gson().fromJson(bundle?.getString("songJson"), Song::class.java)
-        MainActivity.generalUtil.insertImageFromUri(Uri.parse(song.albumArtUri), albumArt, requireActivity(), null)
+        val song = Gson().fromJson(bundle?.getString("songJson"), SongEntity::class.java)
+        MainActivity.generalUtil.insertImageFromUri(Uri.parse(song.albumArtUriString), albumArt, requireActivity(), null)
 
 
     }

@@ -5,26 +5,26 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.badap.Artist
+import com.badap.ArtistEntity
 import com.badap.MainActivity.Companion.generalUtil
 import com.badap.R
-import com.badap.adapters.viewHolders.ArtistGridItem
-import com.badap.adapters.viewHolders.LargeArtistRow
-import com.badap.adapters.viewHolders.MediumArtistRow
-import com.badap.adapters.viewHolders.SmallArtistRow
+import com.badap.adapters.adapterViewHolders.ArtistGridItem
+import com.badap.adapters.adapterViewHolders.LargeArtistRow
+import com.badap.adapters.adapterViewHolders.MediumArtistRow
+import com.badap.adapters.adapterViewHolders.SmallArtistRow
 
-class ArtistRecyclerAdapter(private val artistList: ArrayList<Artist>,
+class ArtistRecyclerAdapter(private val artistList: ArrayList<ArtistEntity>,
                             private val activity: FragmentActivity,
                             private val screenWidth: Int,
                             private var currentViewType: Int
-) : ListAdapter<Artist, RecyclerView.ViewHolder>(ListItemCallback()) {
+) : ListAdapter<ArtistEntity, RecyclerView.ViewHolder>(ListItemCallback()) {
 
-    class ListItemCallback : DiffUtil.ItemCallback<Artist>() {
-        override fun areItemsTheSame(oldItem: Artist, newItem: Artist): Boolean {
+    class ListItemCallback : DiffUtil.ItemCallback<ArtistEntity>() {
+        override fun areItemsTheSame(oldItem: ArtistEntity, newItem: ArtistEntity): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Artist, newItem: Artist): Boolean {
+        override fun areContentsTheSame(oldItem: ArtistEntity, newItem: ArtistEntity): Boolean {
             return oldItem.artistId == newItem.artistId
         }
     }
