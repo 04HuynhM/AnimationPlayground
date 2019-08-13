@@ -12,7 +12,6 @@ import com.badap.adapters.viewHolders.gridItems.GenericGridItemViewHolder
 import com.badap.adapters.viewHolders.rows.LargeSongRow
 import com.badap.adapters.viewHolders.rows.MediumSongRow
 import com.badap.adapters.viewHolders.rows.SmallSongRow
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class SongRecyclerAdapter(private val songList: ArrayList<Song>,
                           private val activity: FragmentActivity,

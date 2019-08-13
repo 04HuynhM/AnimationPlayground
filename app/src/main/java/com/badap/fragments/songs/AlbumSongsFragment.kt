@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -14,15 +13,12 @@ import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.badap.MainActivity
 import com.badap.MainActivity.Companion.mediaStoreUtil
 import com.badap.R
 import com.badap.adapters.SongRecyclerAdapter
-import com.badap.fragments.BottomSheetViewModeDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AlbumSongsFragment : Fragment() {
 

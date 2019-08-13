@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.badap.Album
 import com.badap.MainActivity.Companion.generalUtil
 import com.badap.R
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class LargeAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHolder(v), View.OnClickListener {
     private var view: View = v

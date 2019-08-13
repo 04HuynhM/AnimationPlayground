@@ -12,7 +12,6 @@ import com.badap.adapters.viewHolders.ArtistGridItem
 import com.badap.adapters.viewHolders.LargeArtistRow
 import com.badap.adapters.viewHolders.MediumArtistRow
 import com.badap.adapters.viewHolders.SmallArtistRow
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ArtistRecyclerAdapter(private val artistList: ArrayList<Artist>,
                             private val activity: FragmentActivity,

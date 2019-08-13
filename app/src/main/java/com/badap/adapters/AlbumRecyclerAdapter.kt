@@ -12,7 +12,6 @@ import com.badap.adapters.viewHolders.gridItems.GenericGridItemViewHolder
 import com.badap.adapters.viewHolders.rows.LargeAlbumRow
 import com.badap.adapters.viewHolders.rows.MediumAlbumRow
 import com.badap.adapters.viewHolders.rows.SmallAlbumRow
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AlbumRecyclerAdapter(private val albumList: ArrayList<Album>,
                            private val activity: FragmentActivity,

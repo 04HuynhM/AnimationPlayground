@@ -10,7 +10,6 @@ import com.badap.Artist
 import com.badap.MainActivity
 import com.badap.MainActivity.Companion.generalUtil
 import com.badap.R
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class LargeArtistRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHolder(v), View.OnClickListener {
     private var view: View = v

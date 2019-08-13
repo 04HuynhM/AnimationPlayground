@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.badap.MainActivity
 import com.badap.R
 import com.badap.adapters.SongRecyclerAdapter
-import com.badap.fragments.BottomSheetViewModeDialog
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class AllSongsFragment : Fragment() {

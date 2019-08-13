@@ -11,7 +11,6 @@ import com.badap.Album
 import com.badap.MainActivity.Companion.generalUtil
 import com.badap.R
 import com.badap.Song
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class GenericGridItemViewHolder(view: View,
                                 private var activity: FragmentActivity,

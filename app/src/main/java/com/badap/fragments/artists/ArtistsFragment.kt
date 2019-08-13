@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
@@ -16,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.badap.MainActivity
 import com.badap.R
 import com.badap.adapters.ArtistRecyclerAdapter
-import com.badap.fragments.BottomSheetViewModeDialog
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ArtistsFragment : Fragment() {
 

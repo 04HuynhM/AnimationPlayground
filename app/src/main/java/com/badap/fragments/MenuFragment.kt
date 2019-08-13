@@ -1,7 +1,9 @@
 package com.badap.fragments
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment

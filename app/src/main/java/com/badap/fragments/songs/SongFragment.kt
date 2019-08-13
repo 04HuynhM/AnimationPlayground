@@ -31,8 +31,7 @@ class SongFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val bundle = arguments
-        originalFilePath = bundle?.get("songPath") as String
-        songDuration = bundle.get("duration") as String
+
 
         val mImageView = view.findViewById<ImageView>(R.id.song_waveform_image)
         getWaveForm(originalFilePath, mImageView)
