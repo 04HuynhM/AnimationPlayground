@@ -11,12 +11,10 @@ import com.badap.Album
 import com.badap.MainActivity.Companion.generalUtil
 import com.badap.R
 import com.badap.Song
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class GenericGridItemViewHolder(view: View,
                                 private var activity: FragmentActivity,
-                                private var width: Int,
-                                private val viewFab: FloatingActionButton)
+                                private var width: Int)
     : RecyclerView.ViewHolder(view), View.OnClickListener {
     private var data: Any? = null
     private var mTitleView : TextView? = null
@@ -35,7 +33,7 @@ class GenericGridItemViewHolder(view: View,
     override fun onClick(p0: View?) {
         when(val data = this.data) {
             is Album -> {
-                generalUtil.goToAlbumSongsFragment(data, activity, viewFab)
+                generalUtil.goToAlbumSongsFragment(data, activity)
             }
             is Song -> {
                 generalUtil.goToSongFragment(data, activity)

@@ -1,5 +1,6 @@
 package com.badap
 
+import com.google.gson.Gson
 import java.io.Serializable
 
 data class Artist(val artistId: String,
@@ -7,13 +8,25 @@ data class Artist(val artistId: String,
                   val artistNumberOfTracks: String,
                   val artistNumberOfAlbums: String,
                   val artistIdLong: Long,
-                  val firstAlbumArt: String?) : Serializable
+                  val firstAlbumArt: String?) : Serializable {
+
+    fun toJson() : String {
+        val jsonString = Gson().toJson(this)
+        return jsonString.toString()
+    }
+}
 
 data class Album(val albumId: String,
                   val albumName: String,
                   val artist: String,
                   val numOfSongs: String,
-                  val albumArt: String?) : Serializable
+                  val albumArt: String?) : Serializable {
+
+    fun toJson() : String {
+        val jsonString = Gson().toJson(this)
+        return jsonString.toString()
+    }
+}
 
 data class Song(val songId: Long,
                 val name: String,
@@ -26,4 +39,10 @@ data class Song(val songId: Long,
                 val path: String,
                 val duration: String,
                 val rawDuration: String,
-                val albumArtUri: String?) : Serializable
+                val albumArtUri: String?) : Serializable {
+
+    fun toJson() : String {
+        val jsonString = Gson().toJson(this)
+        return jsonString.toString()
+    }
+}

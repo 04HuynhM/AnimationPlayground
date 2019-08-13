@@ -10,9 +10,8 @@ import com.badap.Artist
 import com.badap.MainActivity
 import com.badap.MainActivity.Companion.generalUtil
 import com.badap.R
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class LargeArtistRow(v: View, activity: FragmentActivity, private val viewFab: FloatingActionButton) : RecyclerView.ViewHolder(v), View.OnClickListener {
+class LargeArtistRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHolder(v), View.OnClickListener {
     private var view: View = v
     private var artist: Artist? = null
     private var mNameView : TextView? = null
@@ -30,7 +29,7 @@ class LargeArtistRow(v: View, activity: FragmentActivity, private val viewFab: F
     }
 
     override fun onClick(p0: View?) {
-        generalUtil.goToAlbumListFragment(artist, mContext, viewFab)
+        generalUtil.goToAlbumListFragment(artist, mContext)
     }
 
     fun bindViewHolder(artist: Artist, width: Int) {
@@ -45,7 +44,7 @@ class LargeArtistRow(v: View, activity: FragmentActivity, private val viewFab: F
     }
 }
 
-class MediumArtistRow(v: View, activity: FragmentActivity, private val viewFab: FloatingActionButton) : RecyclerView.ViewHolder(v), View.OnClickListener {
+class MediumArtistRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHolder(v), View.OnClickListener {
     private var view: View = v
     private var artist: Artist? = null
     private var mNameView : TextView? = null
@@ -63,7 +62,7 @@ class MediumArtistRow(v: View, activity: FragmentActivity, private val viewFab: 
     }
 
     override fun onClick(p0: View?) {
-        generalUtil.goToAlbumListFragment(artist, mContext, viewFab)
+        generalUtil.goToAlbumListFragment(artist, mContext)
     }
 
     fun bindViewHolder(artist: Artist, width: Int) {
@@ -78,7 +77,7 @@ class MediumArtistRow(v: View, activity: FragmentActivity, private val viewFab: 
     }
 }
 
-class SmallArtistRow(v: View, activity: FragmentActivity, private val viewFab: FloatingActionButton) : RecyclerView.ViewHolder(v), View.OnClickListener {
+class SmallArtistRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHolder(v), View.OnClickListener {
     private var view: View = v
     private var artist: Artist? = null
     private var mNameView : TextView? = null
@@ -96,7 +95,7 @@ class SmallArtistRow(v: View, activity: FragmentActivity, private val viewFab: F
     }
 
     override fun onClick(p0: View?) {
-        generalUtil.goToAlbumListFragment(artist, mContext, viewFab)
+        generalUtil.goToAlbumListFragment(artist, mContext)
     }
 
     fun bindViewHolder(artist: Artist, width: Int) {
@@ -112,7 +111,7 @@ class SmallArtistRow(v: View, activity: FragmentActivity, private val viewFab: F
 }
 
 //Multiple Span Grid Layout ViewHolders
-class ArtistGridItem(v: View, activity: FragmentActivity, private val width: Int, private val viewFab: FloatingActionButton)
+class ArtistGridItem(v: View, activity: FragmentActivity, private val width: Int)
     : RecyclerView.ViewHolder(v), View.OnClickListener {
     private var view: View = v
     private var artist: Artist? = null
@@ -127,7 +126,7 @@ class ArtistGridItem(v: View, activity: FragmentActivity, private val width: Int
     }
 
     override fun onClick(p0: View?) {
-        generalUtil.goToAlbumListFragment(artist, mContext, viewFab)
+        generalUtil.goToAlbumListFragment(artist, mContext)
     }
 
     fun bindViewHolder(artist: Artist) {

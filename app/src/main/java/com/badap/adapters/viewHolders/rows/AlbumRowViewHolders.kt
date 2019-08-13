@@ -9,9 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.badap.Album
 import com.badap.MainActivity.Companion.generalUtil
 import com.badap.R
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class LargeAlbumRow(v: View, activity: FragmentActivity, private val viewFab: FloatingActionButton) : RecyclerView.ViewHolder(v), View.OnClickListener {
+class LargeAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHolder(v), View.OnClickListener {
     private var view: View = v
     private var album: Album? = null
     private var nameViewTextView : TextView? = null
@@ -29,7 +28,7 @@ class LargeAlbumRow(v: View, activity: FragmentActivity, private val viewFab: Fl
     }
 
     override fun onClick(p0: View?) {
-        generalUtil.goToAlbumSongsFragment(album, mContext, viewFab)
+        generalUtil.goToAlbumSongsFragment(album, mContext)
     }
 
     fun bindViewHolder(album: Album, width: Int) {
@@ -44,7 +43,7 @@ class LargeAlbumRow(v: View, activity: FragmentActivity, private val viewFab: Fl
     }
 }
 
-class MediumAlbumRow(v: View, activity: FragmentActivity, private val viewFab: FloatingActionButton) : RecyclerView.ViewHolder(v), View.OnClickListener {
+class MediumAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHolder(v), View.OnClickListener {
     private var view: View = v
     private var album: Album? = null
     private var nameViewTextView : TextView? = null
@@ -62,7 +61,7 @@ class MediumAlbumRow(v: View, activity: FragmentActivity, private val viewFab: F
     }
 
     override fun onClick(p0: View?) {
-        generalUtil.goToAlbumSongsFragment(album, mContext, viewFab)
+        generalUtil.goToAlbumSongsFragment(album, mContext)
     }
 
     fun bindViewHolder(album: Album, width: Int) {
@@ -77,7 +76,7 @@ class MediumAlbumRow(v: View, activity: FragmentActivity, private val viewFab: F
     }
 }
 
-class SmallAlbumRow(v: View, activity: FragmentActivity, private val viewFab: FloatingActionButton) : RecyclerView.ViewHolder(v), View.OnClickListener {
+class SmallAlbumRow(v: View, activity: FragmentActivity) : RecyclerView.ViewHolder(v), View.OnClickListener {
     private var view: View = v
     private var album: Album? = null
     private var nameViewTextView : TextView? = null
@@ -95,7 +94,7 @@ class SmallAlbumRow(v: View, activity: FragmentActivity, private val viewFab: Fl
     }
 
     override fun onClick(p0: View?) {
-        generalUtil.goToAlbumSongsFragment(album, mContext, viewFab)
+        generalUtil.goToAlbumSongsFragment(album, mContext)
     }
 
     fun bindViewHolder(album: Album, width: Int) {

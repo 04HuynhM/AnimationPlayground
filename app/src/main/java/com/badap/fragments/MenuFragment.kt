@@ -1,7 +1,9 @@
 package com.badap.fragments
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
@@ -9,9 +11,8 @@ import com.badap.R
 import com.badap.fragments.albums.AllAlbumsFragment
 import com.badap.fragments.artists.ArtistsFragment
 import com.badap.fragments.songs.AllSongsFragment
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class MenuFragment(private val viewFab: FloatingActionButton) : Fragment() {
+class MenuFragment : Fragment() {
 
     lateinit var container: MotionLayout
 
@@ -32,32 +33,27 @@ class MenuFragment(private val viewFab: FloatingActionButton) : Fragment() {
         val allSongsButton = view.findViewById<Button>(R.id.button_all_songs_main)
         val settingsButton = view.findViewById<Button>(R.id.button_settings_main)
         container = view.findViewById(R.id.motionlayout_container_main)
-        if (container.currentState == container.startState) {
-            viewFab.setImageDrawable(resources.getDrawable(R.drawable.ic_view_list_black_24dp, null))
-        } else {
-            viewFab.setImageDrawable(resources.getDrawable(R.drawable.ic_view_module_black_24dp, null))
-        }
 
-        viewFab.setOnClickListener {
-            if (container.currentState == container.startState) {
-                container.transitionToEnd()
-                viewFab.setImageDrawable(resources.getDrawable(R.drawable.ic_view_list_black_24dp, null))
-            } else {
-                container.transitionToStart()
-                viewFab.setImageDrawable(resources.getDrawable(R.drawable.ic_view_module_black_24dp, null))
-            }
-        }
+//        viewFab.setOnClickListener {
+//            if (container.currentState == container.startState) {
+//                container.transitionToEnd()
+//                viewFab.setImageDrawable(resources.getDrawable(R.drawable.ic_view_list_black_24dp, null))
+//            } else {
+//                container.transitionToStart()
+//                viewFab.setImageDrawable(resources.getDrawable(R.drawable.ic_view_module_black_24dp, null))
+//            }
+//        }
 
         artistsButton.setOnClickListener {
-            loadFragment(ArtistsFragment(viewFab))
+            loadFragment(ArtistsFragment())
         }
 
         albumsButton.setOnClickListener {
-            loadFragment(AllAlbumsFragment(viewFab))
+            loadFragment(AllAlbumsFragment())
         }
 
         allSongsButton.setOnClickListener {
-            loadFragment(AllSongsFragment(viewFab))
+            loadFragment(AllSongsFragment())
         }
 
         settingsButton.setOnClickListener {
