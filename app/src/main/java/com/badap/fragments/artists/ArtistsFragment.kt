@@ -4,11 +4,15 @@ package com.badap.fragments.artists
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.core.content.edit
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -32,20 +36,40 @@ class ArtistsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val layoutManager = GridLayoutManager(requireContext(), 12)
         val recyclerView = view.findViewById<RecyclerView>(R.id.artists_recycler)
+        val playButton = view.findViewById<Button>(R.id.artists_play_button)
+        val shuffleButton = view.findViewById<Button>(R.id.artists_shuffle_button)
+        val backButton = view.findViewById<Button>(R.id.artists_back_button)
+        val optionsButton = view.findViewById<Button>(R.id.artists_options_button)
+        val navView = view.findViewById<DrawerLayout>(R.id.artists_container)
+
+        playButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Play all", Toast.LENGTH_SHORT).show()
+        }
+
+        shuffleButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Shuffle all", Toast.LENGTH_SHORT).show()
+        }
+
+        backButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Back all", Toast.LENGTH_SHORT).show()
+        }
+
+        optionsButton.setOnClickListener {
+            Toast.makeText(requireActivity(), "Options yay!", Toast.LENGTH_SHORT).show()
+            navView.openDrawer(Gravity.RIGHT)
+        }
 
         prefs = requireActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE)
         val initialViewMode = prefs.getInt("view_mode", 2)
         val screenWidth = prefs.getInt("screen_width", -1)
 
+        val layoutManager = GridLayoutManager(requireContext(), 12)
         recyclerView.layoutManager = layoutManager
-
         MainActivity.indexedArtists?.let {
             adapter = ArtistRecyclerAdapter(it, requireActivity(), screenWidth, initialViewMode)
             recyclerView.adapter = adapter
         }
-
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return when(adapter.getItemViewType(position)) {

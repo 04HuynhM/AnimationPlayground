@@ -14,14 +14,16 @@
             android:id="@+id/button_all_songs_main"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent" />
+            motion:layout_constraintTop_toBottomOf="@id/menu_title" />
 
         <Constraint
             android:id="@+id/button_albums_main"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             motion:layout_constraintEnd_toEndOf="@+id/button_all_songs_main"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toBottomOf="@+id/button_all_songs_main" />
@@ -30,6 +32,7 @@
             android:id="@+id/button_artists_main"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             motion:layout_constraintEnd_toEndOf="@+id/button_all_songs_main"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toBottomOf="@+id/button_albums_main" />
@@ -38,6 +41,7 @@
             android:id="@+id/button_settings_main"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             motion:layout_constraintEnd_toEndOf="@+id/button_all_songs_main"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toBottomOf="@+id/button_artists_main" />
@@ -49,15 +53,17 @@
             android:id="@+id/button_all_songs_main"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             motion:layout_constraintEnd_toStartOf="@+id/button_albums_main"
             motion:layout_constraintHorizontal_bias="0.5"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent" />
+            motion:layout_constraintTop_toBottomOf="@id/menu_title"/>
 
         <Constraint
             android:id="@+id/button_albums_main"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintHorizontal_bias="0.5"
             motion:layout_constraintStart_toEndOf="@+id/button_all_songs_main"
@@ -67,6 +73,7 @@
             android:id="@+id/button_artists_main"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             motion:layout_constraintEnd_toEndOf="@+id/button_all_songs_main"
             motion:layout_constraintEnd_toStartOf="@+id/button_settings_main"
             motion:layout_constraintHorizontal_bias="0.5"
@@ -77,6 +84,7 @@
             android:id="@+id/button_settings_main"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintHorizontal_bias="0.5"
             motion:layout_constraintStart_toEndOf="@+id/button_artists_main"

@@ -4,15 +4,17 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.RadioGroup
+import android.widget.*
 import androidx.core.content.edit
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.badap.MainActivity
 import com.badap.MainActivity.Companion.mediaStoreUtil
 import com.badap.R
 import com.badap.adapters.SongRecyclerAdapter
@@ -36,13 +38,48 @@ class AlbumSongsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val bundle: Bundle? = arguments
-        requireActivity().title = bundle?.get("albumName").toString()
+        val albumName = bundle?.get("albumName").toString()
         val albumId = bundle?.get("albumId").toString()
         val albumArtUriString = bundle?.get("albumArt").toString()
         val albumArtUri = Uri.parse(albumArtUriString)
-
         val albumArtImageView = view.findViewById<ImageView>(R.id.single_album_art)
+
+        Glide.with(requireContext())
+            .load(albumArtUri)
+            .placeholder(R.drawable.ic_musical_note_and_stave)
+            .centerCrop()
+            .transform(RoundedCorners(25))
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(albumArtImageView)
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.album_songs_recycler)
+        val albumNameTextView = view.findViewById<TextView>(R.id.album_songs_title)
+
+        val spannableArtist = MainActivity.generalUtil.setSpannableString(albumName, requireActivity().getColor(R.color.timecode_shadow))
+        albumNameTextView?.text = spannableArtist
+
+        val playButton = view.findViewById<Button>(R.id.album_songs_play_button)
+        val shuffleButton = view.findViewById<Button>(R.id.album_songs_shuffle_button)
+        val backButton = view.findViewById<Button>(R.id.album_songs_back_button)
+        val optionsButton = view.findViewById<Button>(R.id.album_songs_options_button)
+        val navView = view.findViewById<DrawerLayout>(R.id.single_album_container)
+
+        playButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Play all", Toast.LENGTH_SHORT).show()
+        }
+
+        shuffleButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Shuffle all", Toast.LENGTH_SHORT).show()
+        }
+
+        backButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Back all", Toast.LENGTH_SHORT).show()
+        }
+
+        optionsButton.setOnClickListener {
+            Toast.makeText(requireActivity(), "Options yay!", Toast.LENGTH_SHORT).show()
+            navView.openDrawer(Gravity.RIGHT)
+        }
 
         val songList = mediaStoreUtil.getAllSongsForAlbum(requireContext(), albumId)
 
@@ -55,14 +92,6 @@ class AlbumSongsFragment : Fragment() {
 
         adapter = SongRecyclerAdapter(songList, requireActivity(), screenWidth, initialViewType)
         recyclerView.adapter = adapter
-
-        Glide.with(requireContext())
-            .load(albumArtUri)
-            .placeholder(R.drawable.ic_musical_note_and_stave)
-            .centerCrop()
-            .transform(RoundedCorners(25))
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .into(albumArtImageView)
 
         layoutManager.spanSizeLookup = object: GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {

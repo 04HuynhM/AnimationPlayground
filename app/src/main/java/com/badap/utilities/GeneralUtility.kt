@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.FragmentActivity
 import com.badap.*
-import com.badap.fragments.albums.AlbumsFragment
+import com.badap.fragments.albums.ArtistAlbumsFragment
 import com.badap.fragments.songs.AlbumSongsFragment
 import com.badap.fragments.songs.PlayerFragment
 import com.bumptech.glide.Glide
@@ -36,11 +36,12 @@ class GeneralUtility {
     }
 
     fun goToAlbumListFragment(artist: Artist?, context: FragmentActivity?) {
-        val albumsFragment = AlbumsFragment()
+        val albumsFragment = ArtistAlbumsFragment()
         val bundle = Bundle()
         artist?.let {
             bundle.putLong("artistId", it.artistIdLong)
             bundle.putString("artistName", it.artistName)
+            bundle.putString("firstAlbumArt", it.firstAlbumArt)
         }
         albumsFragment.arguments = bundle
         context?.supportFragmentManager
@@ -57,7 +58,7 @@ class GeneralUtility {
         playerFragment.arguments = bundle
         context?.supportFragmentManager
             ?.beginTransaction()
-            ?.replace(R.id.main_container, playerFragment)
+            ?.add(R.id.main_container, playerFragment)
             ?.addToBackStack("song_fragment")
             ?.commit()
     }

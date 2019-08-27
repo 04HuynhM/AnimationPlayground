@@ -3,46 +3,41 @@
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
-        motion:constraintSetStart="@id/collapsing_single_album_header_start"
-        motion:constraintSetEnd="@id/collapsing_single_album_header_end">
+        motion:constraintSetStart="@id/collapsing_artist_albums_header_start"
+        motion:constraintSetEnd="@id/collapsing_artist_albums_header_end">
 
         <OnSwipe
             motion:dragDirection="dragUp"
-            motion:touchAnchorId="@id/album_songs_recycler"
+            motion:touchAnchorId="@id/artist_albums_recycler"
             motion:touchAnchorSide="top" />
 
         <KeyFrameSet>
             <KeyAttribute
                 android:alpha="0"
-                motion:framePosition="90"
-                motion:motionTarget="@id/album_songs_title" />
+                motion:framePosition="65"
+                motion:motionTarget="@id/artist_albums_title" />
             <KeyAttribute
                 android:alpha="0"
-                motion:framePosition="90"
-                motion:motionTarget="@id/album_songs_play_button" />
+                motion:framePosition="65"
+                motion:motionTarget="@id/artist_albums_play_button" />
             <KeyAttribute
                 android:alpha="0"
-                motion:framePosition="90"
-                motion:motionTarget="@id/album_songs_shuffle_button" />
+                motion:framePosition="65"
+                motion:motionTarget="@id/artist_albums_shuffle_button" />
             <KeyAttribute
                 android:alpha="0"
-                motion:framePosition="90"
-                motion:motionTarget="@id/album_songs_options_button" />
+                motion:framePosition="65"
+                motion:motionTarget="@id/artist_albums_options_button" />
             <KeyAttribute
                 android:alpha="0"
                 motion:framePosition="20"
-                motion:motionTarget="@id/album_songs_back_button" />
+                motion:motionTarget="@id/artist_albums_back_button" />
         </KeyFrameSet>
+
     </Transition>
 
-    <ConstraintSet android:id="@+id/collapsing_single_album_header_start">
-
-        <Constraint android:id="@id/single_album_art">
-            <Motion motion:transitionEasing="linear"/>
-            <PropertySet android:alpha="1" />
-        </Constraint>
-
-        <Constraint android:id="@id/album_songs_back_button" >
+    <ConstraintSet android:id="@+id/collapsing_artist_albums_header_start">
+        <Constraint android:id="@id/artist_albums_back_button">
             <Layout
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/standard_button_height"
@@ -53,32 +48,32 @@
                 motion:layout_constraintHorizontal_bias="0.0"
                 motion:layout_constraintStart_toStartOf="parent"
                 motion:layout_constraintTop_toTopOf="parent" />
+            <PropertySet android:alpha="1"/>
             <Motion motion:transitionEasing="linear"/>
-            <PropertySet android:alpha="1" />
         </Constraint>
 
-        <Constraint android:id="@id/album_songs_title">
+        <Constraint android:id="@id/artist_albums_title">
+            <PropertySet android:alpha="1"/>
             <Motion motion:transitionEasing="linear"/>
-            <PropertySet android:alpha="1" />
         </Constraint>
 
-        <Constraint android:id="@id/album_songs_play_button">
+        <Constraint android:id="@id/artist_albums_play_button">
+            <PropertySet android:alpha="1"/>
             <Motion motion:transitionEasing="linear"/>
-            <PropertySet android:alpha="1" />
         </Constraint>
 
-        <Constraint android:id="@id/album_songs_shuffle_button">
+        <Constraint android:id="@id/artist_albums_shuffle_button">
+            <PropertySet android:alpha="1"/>
             <Motion motion:transitionEasing="linear"/>
-            <PropertySet android:alpha="1" />
         </Constraint>
 
-        <Constraint android:id="@id/album_songs_options_button">
+        <Constraint android:id="@id/artist_albums_options_button">
+            <PropertySet android:alpha="1"/>
             <Motion motion:transitionEasing="linear"/>
-            <PropertySet android:alpha="1" />
         </Constraint>
 
         <Constraint
-            android:id="@+id/album_songs_guideline"
+            android:id="@id/artist_albums_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -87,13 +82,8 @@
         </Constraint>
     </ConstraintSet>
 
-    <ConstraintSet android:id="@+id/collapsing_single_album_header_end">
-        <Constraint android:id="@id/single_album_art">
-            <Motion motion:transitionEasing="linear"/>
-            <PropertySet android:alpha="1" />
-        </Constraint>
-
-        <Constraint android:id="@id/album_songs_back_button" >
+    <ConstraintSet android:id="@+id/collapsing_artist_albums_header_end">
+        <Constraint android:id="@id/artist_albums_back_button">
             <Layout
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/standard_button_height"
@@ -104,39 +94,38 @@
                 motion:layout_constraintHorizontal_bias="1.0"
                 motion:layout_constraintStart_toStartOf="parent"
                 motion:layout_constraintTop_toTopOf="parent" />
+            <PropertySet android:alpha="0"/>
             <Motion motion:transitionEasing="linear"/>
-            <PropertySet android:alpha="0" />
         </Constraint>
 
-        <Constraint android:id="@id/album_songs_title">
+        <Constraint android:id="@id/artist_albums_title">
+            <PropertySet android:alpha="0"/>
             <Motion motion:transitionEasing="linear"/>
-            <PropertySet android:alpha="0" />
         </Constraint>
 
-        <Constraint android:id="@id/album_songs_play_button">
+        <Constraint android:id="@id/artist_albums_play_button" >
+            <PropertySet android:alpha="0"/>
             <Motion motion:transitionEasing="linear"/>
-            <PropertySet android:alpha="0" />
         </Constraint>
 
-        <Constraint android:id="@id/album_songs_shuffle_button">
-            <Motion motion:transitionEasing="linear"/>
+        <Constraint android:id="@id/artist_albums_shuffle_button">
             <PropertySet android:alpha="0" />
+            <Motion motion:transitionEasing="linear"/>
         </Constraint>
 
-        <Constraint android:id="@id/album_songs_options_button">
+        <Constraint android:id="@id/artist_albums_options_button">
+            <PropertySet android:alpha="0"/>
             <Motion motion:transitionEasing="linear"/>
-            <PropertySet android:alpha="0" />
         </Constraint>
 
         <Constraint
-            android:id="@id/album_songs_guideline"
+            android:id="@id/artist_albums_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            motion:layout_constraintGuide_percent="0" >
+            motion:layout_constraintGuide_percent="0">
             <Motion motion:transitionEasing="linear"/>
         </Constraint>
-
     </ConstraintSet>
 
 </MotionScene>

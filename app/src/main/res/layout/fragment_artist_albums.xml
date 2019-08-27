@@ -2,20 +2,31 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/albums_container"
+    android:id="@+id/artist_albums_drawer_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.albums.AlbumsFragment">
+    tools:context=".fragments.songs.AlbumSongsFragment">
 
     <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/albums_motionlayout"
+        android:id="@+id/single_album_motionlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutDescription="@xml/albums_collapsing_header_motionscene"
-        tools:context=".fragments.albums.AlbumsFragment">
+        android:background="@android:color/background_light"
+        app:layoutDescription="@xml/artist_albums_collapsing_header">
+
+        <ImageView
+            android:id="@+id/artist_albums_art"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@color/design_default_color_primary"
+            app:layout_constraintBottom_toTopOf="@+id/artist_albums_guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/albums_back_button"
+            android:id="@+id/artist_albums_back_button"
             style="@android:style/Widget.Material.Button"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/standard_button_height"
@@ -27,29 +38,29 @@
             android:drawableStart="@drawable/ic_arrow_back_black_24dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:text="Library"
+            android:text="Artists"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/albums_title"
+            android:id="@+id/artist_albums_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
             android:alpha="1"
-            android:drawableStart="@drawable/ic_dvd_disc"
             android:drawablePadding="8dp"
-            android:text="Albums"
+            android:textColor="@android:color/background_light"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/albums_play_button"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/artist_albums_play_button"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="Albums" />
+            tools:text="Some Artist" />
 
         <Button
-            android:id="@+id/albums_play_button"
+            android:id="@+id/artist_albums_play_button"
             style="@android:style/Widget.Material.Button"
             android:layout_width="45dp"
             android:layout_height="@dimen/standard_button_height"
@@ -57,51 +68,56 @@
             android:layout_marginBottom="16dp"
             android:alpha="1"
             android:background="@drawable/custom_play_button_shape"
-            app:layout_constraintBottom_toTopOf="@+id/album_recycler_guideline"
+            app:layout_constraintBottom_toTopOf="@+id/artist_albums_guideline"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/albums_shuffle_button"
+            android:id="@+id/artist_albums_shuffle_button"
             style="@android:style/Widget.Material.Button"
             android:layout_width="45dp"
             android:layout_height="@dimen/standard_button_height"
             android:layout_marginStart="16dp"
             android:alpha="1"
             android:background="@drawable/custom_shuffle_button_shape"
-            app:layout_constraintStart_toEndOf="@+id/albums_play_button"
-            app:layout_constraintTop_toTopOf="@+id/albums_play_button" />
+            app:layout_constraintStart_toEndOf="@+id/artist_albums_play_button"
+            app:layout_constraintTop_toTopOf="@+id/artist_albums_play_button" />
+
+        <Button
+            android:id="@+id/artist_albums_options_button"
+            android:layout_width="36dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/options_button_background"
+            app:layout_constraintBottom_toBottomOf="@+id/artist_albums_shuffle_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/artist_albums_shuffle_button" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/album_recycler_guideline"
+            android:id="@+id/artist_albums_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.28" />
+            app:layout_constraintGuide_percent="0.43" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/albums_recycler"
+            android:id="@+id/artist_albums_recycler"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="4dp"
-            android:background="@android:color/background_light"
-            android:elevation="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/album_recycler_guideline"
-            tools:listitem="@layout/large_album_item_row">
-
-        </androidx.recyclerview.widget.RecyclerView>
+            app:layout_constraintTop_toTopOf="@+id/artist_albums_guideline"
+            tools:listitem="@layout/large_album_item_row" />
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/albums_nav_view"
+        android:id="@+id/artist_albums_nav_view"
         android:layout_width="192dp"
         android:layout_height="match_parent"
         android:layout_gravity="end">
 
         <include layout="@layout/albums_drawer_layout" />
     </com.google.android.material.navigation.NavigationView>
+
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -3,7 +3,6 @@ package com.badap.fragments.songs
 
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +10,8 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.badap.MainActivity
-
 import com.badap.R
 import com.badap.Song
 import com.google.gson.Gson
@@ -50,7 +49,11 @@ class PlayerFragment : Fragment() {
         val song = Gson().fromJson(bundle?.getString("songJson"), Song::class.java)
         MainActivity.generalUtil.insertImageFromUri(Uri.parse(song.albumArtUri), albumArt, requireActivity(), null)
 
-
+        songNameTextView.text = song.title
+        songAlbumTextView.text = song.album
+        songArtistTextView.text = song.artist
+        currentTimeTextView.text = "0:00"
+        songDurationTextView.text = song.duration
     }
 
     private fun initViews(view: View) {

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:motion="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Transition motion:constraintSetStart="@layout/fragment_player"
+        motion:constraintSetEnd="@layout/fragment_player_collapsed_redo"
+        motion:duration="150">
+        <OnSwipe
+            motion:dragDirection="dragDown"
+            motion:touchAnchorId="@id/imageview_art_player"
+            motion:touchAnchorSide="top" />
+
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="30"
+                motion:motionTarget="@id/button_fast_foward_player" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="30"
+                motion:motionTarget="@id/button_rewind_player" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="30"
+                motion:motionTarget="@id/button_skip_forward_player" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="30"
+                motion:motionTarget="@id/button_previous_player" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="30"
+                motion:motionTarget="@id/textview_album_name_player" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="30"
+                motion:motionTarget="@id/button_shuffle_player" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="30"
+                motion:motionTarget="@id/button_repeat_player" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="30"
+                motion:motionTarget="@id/button_sleep_timer_player" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="30"
+                motion:motionTarget="@id/seekbar_song_player" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="30"
+                motion:motionTarget="@id/textview_song_current_time_player" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="30"
+                motion:motionTarget="@id/textview_song_total_time_player" />
+        </KeyFrameSet>
+    </Transition>
+
+
+
+    <ConstraintSet android:id="@+id/collapsing_player_start">
+        <Constraint
+            android:id="@id/motionlayout_player"
+            android:layout_height="match_parent"/>
+
+        <Constraint
+            android:id="@id/imageview_art_player"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            motion:layout_constraintBottom_toTopOf="@+id/guideline6"
+            motion:layout_constraintDimensionRatio="1:1"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"/>
+
+        <Constraint
+            android:id="@id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            motion:layout_constraintGuide_percent="0.56" />
+
+        <Constraint
+            android:id="@id/button_play_player"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="24dp"
+
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/button_sleep_timer_player" />
+
+        <Constraint
+            android:id="@id/button_fast_foward_player"
+            android:alpha="1"
+            motion:layout_constraintBottom_toBottomOf="@+id/button_play_player"
+            motion:layout_constraintStart_toEndOf="@+id/button_skip_forward_player"
+            motion:layout_constraintTop_toTopOf="@+id/button_play_player" />
+
+        <Constraint
+            android:id="@id/button_rewind_player"
+            android:alpha="1"
+            motion:layout_constraintBottom_toBottomOf="@+id/button_play_player"
+            motion:layout_constraintEnd_toStartOf="@+id/button_previous_player"
+            motion:layout_constraintTop_toTopOf="@+id/button_play_player" />
+
+        <Constraint
+            android:id="@id/button_skip_forward_player"
+            android:alpha="1"
+            motion:layout_constraintBottom_toBottomOf="@+id/button_play_player"
+            motion:layout_constraintStart_toEndOf="@+id/button_play_player"
+            motion:layout_constraintTop_toTopOf="@+id/button_play_player" />
+
+        <Constraint
+            android:id="@id/button_previous_player"
+            android:alpha="1"
+            motion:layout_constraintBottom_toBottomOf="@+id/button_play_player"
+            motion:layout_constraintEnd_toStartOf="@+id/button_play_player"
+            motion:layout_constraintTop_toTopOf="@+id/button_play_player" />
+
+        <Constraint
+            android:id="@id/textview_song_name_player"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:maxLines="1"
+            android:paddingTop="8dp"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            motion:layout_constraintBottom_toTopOf="@+id/textview_album_name_player"
+            motion:layout_constraintEnd_toEndOf="@+id/imageview_art_player"
+            motion:layout_constraintStart_toStartOf="@+id/imageview_art_player"/>
+
+        <Constraint
+            android:id="@id/textview_album_name_player"
+            android:alpha="1"
+            motion:layout_constraintBottom_toTopOf="@+id/textview_artist_player"
+            motion:layout_constraintEnd_toEndOf="@+id/imageview_art_player"
+            motion:layout_constraintStart_toStartOf="@+id/imageview_art_player"/>
+
+        <Constraint
+            android:id="@id/textview_artist_player"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textAlignment="center"
+            android:textSize="16dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/imageview_art_player"
+            motion:layout_constraintEnd_toEndOf="@+id/imageview_art_player"
+            motion:layout_constraintStart_toStartOf="@+id/imageview_art_player"/>
+
+        <Constraint
+            android:id="@id/button_shuffle_player"
+            android:alpha="1"
+            motion:layout_constraintBottom_toBottomOf="@+id/button_sleep_timer_player"
+            motion:layout_constraintStart_toEndOf="@+id/button_sleep_timer_player"
+            motion:layout_constraintTop_toTopOf="@+id/button_sleep_timer_player" />
+
+        <Constraint
+            android:id="@id/button_repeat_player"
+            android:alpha="1"
+            motion:layout_constraintBottom_toBottomOf="@+id/button_sleep_timer_player"
+            motion:layout_constraintEnd_toStartOf="@+id/button_sleep_timer_player"
+            motion:layout_constraintTop_toTopOf="@+id/button_sleep_timer_player" />
+
+        <Constraint
+            android:id="@id/button_sleep_timer_player"
+            android:alpha="1"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="@+id/guideline6" />
+
+        <Constraint
+            android:id="@id/seekbar_song_player"
+            android:alpha="1"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/button_play_player" />
+
+        <Constraint
+            android:id="@id/textview_song_current_time_player"
+            android:alpha="1"
+            motion:layout_constraintStart_toStartOf="@+id/seekbar_song_player"
+            motion:layout_constraintTop_toBottomOf="@+id/seekbar_song_player"/>
+
+        <Constraint
+            android:id="@+id/textview_song_total_time_player"
+            android:alpha="1"
+            motion:layout_constraintEnd_toEndOf="@+id/seekbar_song_player"
+            motion:layout_constraintTop_toBottomOf="@+id/seekbar_song_player"/>
+    </ConstraintSet>
+
+
+    <ConstraintSet android:id="@+id/collapsing_player_end">
+        <Constraint
+            android:id="@id/motionlayout_player"
+            android:layout_height="wrap_content" />
+
+        <Constraint
+            android:id="@id/imageview_art_player"
+            android:layout_width="60dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            motion:layout_constraintBottom_toTopOf="@+id/guideline6"
+            motion:layout_constraintDimensionRatio="1:1"
+            motion:layout_constraintStart_toStartOf="parent"/>
+
+        <Constraint
+            android:id="@id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            motion:layout_constraintGuide_percent="1.0" />
+
+        <Constraint
+            android:id="@id/button_play_player"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="@+id/imageview_art_player" />
+
+        <Constraint
+            android:id="@id/button_fast_foward_player"
+            android:alpha="0"
+            android:visibility="gone"/>
+
+        <Constraint
+            android:id="@id/button_rewind_player"
+            android:alpha="0"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@id/button_skip_forward_player"
+            android:alpha="0"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@id/button_previous_player"
+            android:alpha="0"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@id/textview_song_name_player"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/timecode_shadow"
+            android:maxLines="1"
+            android:textAlignment="textStart"
+            android:textSize="14sp"
+            motion:layout_constraintBottom_toTopOf="@+id/textview_artist_player"
+            motion:layout_constraintEnd_toStartOf="@+id/button_play_player"
+            motion:layout_constraintStart_toEndOf="@+id/imageview_art_player"
+            motion:layout_constraintTop_toTopOf="@+id/imageview_art_player"/>
+
+        <Constraint
+            android:id="@id/textview_album_name_player"
+            android:alpha="0"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@id/textview_artist_player"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:textAlignment="textStart"
+            android:textSize="14sp"
+            motion:layout_constraintBottom_toBottomOf="@+id/imageview_art_player"
+            motion:layout_constraintEnd_toStartOf="@+id/button_play_player"
+            motion:layout_constraintStart_toEndOf="@+id/imageview_art_player"
+            motion:layout_constraintTop_toBottomOf="@+id/textview_song_name_player"/>
+
+        <Constraint
+            android:id="@id/button_shuffle_player"
+            android:alpha="0"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@id/button_repeat_player"
+            android:alpha="0"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@id/button_sleep_timer_player"
+            android:alpha="0"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@id/seekbar_song_player"
+            android:alpha="0"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@id/textview_song_current_time_player"
+            android:alpha="0"
+            android:visibility="gone"/>
+
+        <Constraint
+            android:id="@id/textview_song_total_time_player"
+            android:alpha="0"
+            android:visibility="gone"/>
+
+    </ConstraintSet>
+
+
+</MotionScene>

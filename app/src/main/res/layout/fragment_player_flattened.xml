@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motionlayout_player"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".fragments.songs.PlayerFragment"
+    app:layoutDescription="@xml/player_collapse_motionscene">
+
+
+    <ImageView
+        android:id="@+id/imageview_art_player"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <ImageButton
+        android:id="@+id/button_play_player"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/back_button_shape"
+        android:src="@drawable/ic_play_arrow_black_transparent_large"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textview_song_name_player"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/timecode_shadow"
+        android:maxLines="1"
+        android:textAlignment="textStart"
+        android:textColor="@color/background"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textview_artist_player"
+        app:layout_constraintEnd_toStartOf="@+id/button_play_player"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageview_art_player"
+        app:layout_constraintTop_toTopOf="@+id/imageview_art_player"
+        tools:text="Some song name here about some topic" />
+
+    <TextView
+        android:id="@+id/textview_artist_player"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/timecode_shadow"
+        android:textAlignment="textStart"
+        android:textColor="@color/background"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageview_art_player"
+        app:layout_constraintEnd_toStartOf="@+id/button_play_player"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageview_art_player"
+        app:layout_constraintTop_toBottomOf="@+id/textview_song_name_player"
+        tools:text="Artist name goes here" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

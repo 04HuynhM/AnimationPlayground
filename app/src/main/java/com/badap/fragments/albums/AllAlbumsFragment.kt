@@ -3,11 +3,15 @@ package com.badap.fragments.albums
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.core.content.edit
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,25 +29,36 @@ class AllAlbumsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_albums, container, false)
+        return inflater.inflate(R.layout.fragment_all_albums, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val layoutManager = GridLayoutManager(requireContext(), 12)
         val recyclerView = view.findViewById<RecyclerView>(R.id.albums_recycler)
+        val viewTypeRadioGroup: RadioGroup = view.findViewById(R.id.albums_drawer_viewtype_radiogroup)
+        val playButton = view.findViewById<Button>(R.id.albums_play_button)
+        val shuffleButton = view.findViewById<Button>(R.id.albums_shuffle_button)
+        val backButton = view.findViewById<Button>(R.id.albums_back_button)
+        val optionsButton = view.findViewById<Button>(R.id.albums_options_button)
+        val navView = view.findViewById<DrawerLayout>(R.id.albums_container)
 
-        prefs = requireContext().getSharedPreferences("prefs", Context.MODE_PRIVATE)
-        val initialViewMode = prefs.getInt("view_mode", 1)
-        val screenWidth = prefs.getInt("screen_width", -1)
-
-        MainActivity.indexedAlbums?.let {
-            adapter = AlbumRecyclerAdapter(it, requireActivity(), screenWidth, initialViewMode)
-            recyclerView.adapter = adapter
+        playButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Play all", Toast.LENGTH_SHORT).show()
         }
 
-        val viewTypeRadioGroup: RadioGroup = view.findViewById(R.id.albums_drawer_viewtype_radiogroup)
+        shuffleButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Shuffle all", Toast.LENGTH_SHORT).show()
+        }
+
+        backButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Back all", Toast.LENGTH_SHORT).show()
+        }
+
+        optionsButton.setOnClickListener {
+            Toast.makeText(requireActivity(), "Options yay!", Toast.LENGTH_SHORT).show()
+            navView.openDrawer(Gravity.RIGHT)
+        }
 
         viewTypeRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
@@ -68,8 +83,17 @@ class AllAlbumsFragment : Fragment() {
             }
         }
 
-        recyclerView.layoutManager = layoutManager
+        prefs = requireContext().getSharedPreferences("prefs", Context.MODE_PRIVATE)
+        val initialViewMode = prefs.getInt("view_mode", 1)
+        val screenWidth = prefs.getInt("screen_width", -1)
 
+        MainActivity.indexedAlbums?.let {
+            adapter = AlbumRecyclerAdapter(it, requireActivity(), screenWidth, initialViewMode)
+            recyclerView.adapter = adapter
+        }
+
+        val layoutManager = GridLayoutManager(requireContext(), 12)
+        recyclerView.layoutManager = layoutManager
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return when(adapter.getItemViewType(position)) {

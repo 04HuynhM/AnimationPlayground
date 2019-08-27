@@ -4,26 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/motionlayout_player"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
-    app:layoutDescription="@xml/player_collapse_motionscene"
+    android:paddingTop="8dp"
     tools:context=".fragments.songs.PlayerFragment">
-
 
     <ImageView
         android:id="@+id/imageview_art_player"
-        android:layout_width="0dp"
+        android:layout_width="60dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/backgrounds/scenic" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -31,24 +26,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.56" />
+        android:visibility="gone"
+        app:layout_constraintGuide_percent="1.0" />
 
     <TextView
         android:id="@+id/textview_song_name_player"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
         android:background="@color/timecode_shadow"
         android:maxLines="1"
-        android:paddingTop="8dp"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textColor="@color/background"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textview_album_name_player"
-        app:layout_constraintEnd_toEndOf="@+id/imageview_art_player"
-        app:layout_constraintStart_toStartOf="@+id/imageview_art_player"
+        app:layout_constraintBottom_toTopOf="@+id/textview_artist_player"
+        app:layout_constraintEnd_toStartOf="@+id/button_play_player"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageview_art_player"
+        app:layout_constraintTop_toTopOf="@+id/imageview_art_player"
         tools:text="Some song name here about some topic" />
 
     <TextView
@@ -57,12 +54,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:alpha="1"
+        android:alpha="0"
         android:background="@color/timecode_shadow"
         android:paddingTop="8dp"
         android:textAlignment="center"
         android:textColor="@color/background"
         android:textSize="16sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/textview_artist_player"
         app:layout_constraintEnd_toEndOf="@+id/imageview_art_player"
         app:layout_constraintHorizontal_bias="1.0"
@@ -73,19 +71,17 @@
         android:id="@+id/textview_artist_player"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
         android:background="@color/timecode_shadow"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textColor="@color/background"
-        android:textSize="16dp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageview_art_player"
-        app:layout_constraintEnd_toEndOf="@+id/imageview_art_player"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/imageview_art_player"
+        app:layout_constraintEnd_toStartOf="@+id/button_play_player"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageview_art_player"
+        app:layout_constraintTop_toBottomOf="@+id/textview_song_name_player"
         tools:text="Artist name goes here" />
 
     <ImageButton
@@ -93,9 +89,10 @@
         android:layout_width="60dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
-        android:alpha="1"
+        android:alpha="0"
         android:background="@drawable/circle_background"
         android:src="@drawable/ic_shuffle_black"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/button_sleep_timer_player"
         app:layout_constraintStart_toEndOf="@+id/button_sleep_timer_player"
         app:layout_constraintTop_toTopOf="@+id/button_sleep_timer_player" />
@@ -105,9 +102,10 @@
         android:layout_width="60dp"
         android:layout_height="40dp"
         android:layout_marginEnd="16dp"
-        android:alpha="1"
+        android:alpha="0"
         android:background="@drawable/circle_background"
         android:src="@drawable/ic_repeat"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/button_sleep_timer_player"
         app:layout_constraintEnd_toStartOf="@+id/button_sleep_timer_player"
         app:layout_constraintTop_toTopOf="@+id/button_sleep_timer_player" />
@@ -119,9 +117,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        android:alpha="1"
+        android:alpha="0"
         android:background="@drawable/circle_background"
         android:src="@drawable/ic_access_time_black_48dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline6" />
@@ -134,7 +133,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:alpha="1"
+        android:alpha="0"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_play_player" />
@@ -144,7 +144,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:alpha="1"
+        android:alpha="0"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/seekbar_song_player"
         app:layout_constraintTop_toBottomOf="@+id/seekbar_song_player"
         tools:text="0:00" />
@@ -154,31 +155,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:alpha="1"
+        android:alpha="0"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/seekbar_song_player"
         app:layout_constraintTop_toBottomOf="@+id/seekbar_song_player"
         tools:text="3:45" />
-
-    <ImageButton
-        android:id="@+id/button_play_player"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/back_button_shape"
-        android:src="@drawable/ic_play_arrow_black_transparent_large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_sleep_timer_player" />
 
     <ImageButton
         android:id="@+id/button_fast_foward_player"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
-        android:alpha="1"
+        android:alpha="0"
         android:background="@drawable/back_button_shape"
         android:src="@drawable/ic_fast_forward_black_36dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/button_play_player"
         app:layout_constraintStart_toEndOf="@+id/button_skip_forward_player"
         app:layout_constraintTop_toTopOf="@+id/button_play_player" />
@@ -188,9 +179,10 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginEnd="8dp"
-        android:alpha="1"
+        android:alpha="0"
         android:background="@drawable/back_button_shape"
         android:src="@drawable/ic_fast_rewind_black_36dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/button_play_player"
         app:layout_constraintEnd_toStartOf="@+id/button_previous_player"
         app:layout_constraintTop_toTopOf="@+id/button_play_player" />
@@ -200,9 +192,10 @@
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:layout_marginStart="8dp"
-        android:alpha="1"
+        android:alpha="0"
         android:background="@drawable/back_button_shape"
         android:src="@drawable/ic_skip_next_black_36dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/button_play_player"
         app:layout_constraintStart_toEndOf="@+id/button_play_player"
         app:layout_constraintTop_toTopOf="@+id/button_play_player" />
@@ -212,11 +205,23 @@
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:layout_marginEnd="8dp"
-        android:alpha="1"
+        android:alpha="0"
         android:background="@drawable/back_button_shape"
         android:src="@drawable/ic_skip_previous_black_36dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/button_play_player"
         app:layout_constraintEnd_toStartOf="@+id/button_play_player"
         app:layout_constraintTop_toTopOf="@+id/button_play_player" />
+
+    <ImageButton
+        android:id="@+id/button_play_player"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/back_button_shape"
+        android:src="@drawable/ic_play_arrow_black_transparent_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageview_art_player" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

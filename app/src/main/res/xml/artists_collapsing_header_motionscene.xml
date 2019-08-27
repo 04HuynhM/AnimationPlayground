@@ -24,6 +24,10 @@
                 motion:motionTarget="@id/artists_shuffle_button" />
             <KeyAttribute
                 android:alpha="0"
+                motion:framePosition="65"
+                motion:motionTarget="@id/artists_options_button" />
+            <KeyAttribute
+                android:alpha="0"
                 motion:framePosition="20"
                 motion:motionTarget="@id/artists_back_button" />
         </KeyFrameSet>
@@ -57,6 +61,11 @@
         </Constraint>
 
         <Constraint android:id="@id/artists_shuffle_button">
+            <PropertySet android:alpha="1"/>
+            <Motion motion:transitionEasing="linear"/>
+        </Constraint>
+
+        <Constraint android:id="@id/artists_options_button">
             <PropertySet android:alpha="1"/>
             <Motion motion:transitionEasing="linear"/>
         </Constraint>
@@ -102,6 +111,11 @@
 
         <Constraint android:id="@id/artists_shuffle_button">
             <PropertySet android:alpha="0" />
+            <Motion motion:transitionEasing="linear"/>
+        </Constraint>
+
+        <Constraint android:id="@id/artists_options_button">
+            <PropertySet android:alpha="0"/>
             <Motion motion:transitionEasing="linear"/>
         </Constraint>
 

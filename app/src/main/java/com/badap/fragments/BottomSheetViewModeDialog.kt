@@ -10,7 +10,7 @@ import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
 
 import com.badap.R
-import com.badap.fragments.albums.AlbumsFragment
+import com.badap.fragments.albums.ArtistAlbumsFragment
 import com.badap.fragments.albums.AllAlbumsFragment
 import com.badap.fragments.artists.ArtistsFragment
 import com.badap.fragments.songs.AlbumSongsFragment
@@ -83,8 +83,8 @@ class BottomSheetViewModeDialog(val fragment: Fragment, val viewFab: FloatingAct
     private fun setViewType(fragment: Any, viewType: Int) {
         Log.i("Wtf", "Is this working?")
         when (fragment) {
-            is AlbumsFragment -> {
-                Log.i("Bottom Sheet viewtype", "Is AlbumsFragment")
+            is ArtistAlbumsFragment -> {
+                Log.i("Bottom Sheet viewtype", "Is ArtistAlbumsFragment")
                 fragment.setViewType(viewType)
             }
             is AllAlbumsFragment -> {

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
 import com.badap.R
@@ -32,17 +33,18 @@ class MenuFragment : Fragment() {
         val albumsButton = view.findViewById<Button>(R.id.button_albums_main)
         val allSongsButton = view.findViewById<Button>(R.id.button_all_songs_main)
         val settingsButton = view.findViewById<Button>(R.id.button_settings_main)
+        val layoutButton = view.findViewById<ImageButton>(R.id.button_menu_layout)
         container = view.findViewById(R.id.motionlayout_container_main)
 
-//        viewFab.setOnClickListener {
-//            if (container.currentState == container.startState) {
-//                container.transitionToEnd()
-//                viewFab.setImageDrawable(resources.getDrawable(R.drawable.ic_view_list_black_24dp, null))
-//            } else {
-//                container.transitionToStart()
-//                viewFab.setImageDrawable(resources.getDrawable(R.drawable.ic_view_module_black_24dp, null))
-//            }
-//        }
+        layoutButton.setOnClickListener {
+            if (container.currentState == container.startState) {
+                container.transitionToEnd()
+                layoutButton.setImageDrawable(resources.getDrawable(R.drawable.ic_view_list_grey_24dp, null))
+            } else {
+                container.transitionToStart()
+                layoutButton.setImageDrawable(resources.getDrawable(R.drawable.ic_view_module_grey_24dp, null))
+            }
+        }
 
         artistsButton.setOnClickListener {
             loadFragment(ArtistsFragment())
