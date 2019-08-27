@@ -4,17 +4,22 @@ package com.badap.fragments.artists
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.badap.MainActivity
 import com.badap.R
 import com.badap.adapters.ArtistRecyclerAdapter
+import com.badap.viewModels.ArtistViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class ArtistsFragment : Fragment() {
 
@@ -34,17 +39,16 @@ class ArtistsFragment : Fragment() {
 
         val layoutManager = GridLayoutManager(requireContext(), 12)
         val recyclerView = view.findViewById<RecyclerView>(R.id.artists_recycler)
-
         prefs = requireActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE)
         val initialViewMode = prefs.getInt("view_mode", 2)
         val screenWidth = prefs.getInt("screen_width", -1)
-
         recyclerView.layoutManager = layoutManager
 
-        MainActivity.indexedArtists?.let {
-            adapter = ArtistRecyclerAdapter(it, requireActivity(), screenWidth, initialViewMode)
-            recyclerView.adapter = adapter
-        }
+        val artistViewModel = ViewModelProvider(this).get(ArtistViewModel::class.java)
+        val artistList = ArrayList(artistViewModel.getArtistList())
+
+        adapter = ArtistRecyclerAdapter(artistList, requireActivity(), screenWidth, initialViewMode)
+        recyclerView.adapter = adapter
 
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {

@@ -6,6 +6,7 @@ import android.content.ContentUris
 import android.content.Context
 import android.database.Cursor
 import android.net.Uri
+import android.os.Looper
 import android.provider.MediaStore
 import android.util.Log
 import androidx.room.Database
@@ -34,34 +35,43 @@ abstract class MusicDatabase: RoomDatabase() {
         @Volatile private var INSTANCE: MusicDatabase? = null
 
         fun getInstance(context: Context): MusicDatabase {
-            val tempInstance = INSTANCE
-            if (tempInstance != null) {
-                return tempInstance
-            }
-            synchronized(this) {
-                val instance
-                        = Room.databaseBuilder(context.applicationContext,
-                    MusicDatabase::class.java,
-                    "indexed_library")
-                    .addCallback(getCallback(context))
-                    .build()
-                INSTANCE = instance
-                return instance
-            }
-        }
-
-        private fun getCallback(context: Context) : Callback {
-            return object : RoomDatabase.Callback() {
-                override fun onCreate(db: SupportSQLiteDatabase) {
-                    super.onCreate(db)
-                    INSTANCE?.let { db ->
+            return INSTANCE ?: Room
+                .databaseBuilder(context.applicationContext, MusicDatabase::class.java, "indexed_music_library")
+                .addCallback(object: RoomDatabase.Callback() {
+                    override fun onCreate(db: SupportSQLiteDatabase) {
+                        super.onCreate(db)
+                        Log.i("TAG", "ON CREATE HAS BEEN LAUNCHED!")
                         val mso = MediaStoreOperations()
-                        mso.populateSongsTable(context, db)
-                        mso.populateAlbumsTable(context, db)
-                        mso.populateArtistsTable(context, db)
+                        mso.populateSongsTable(context, INSTANCE)
+                        mso.populateAlbumsTable(context, INSTANCE)
+                        mso.populateArtistsTable(context, INSTANCE)
                     }
-                }
-            }
+                })
+                .build()
+//            val tempInstance = INSTANCE
+//            if (tempInstance != null) {
+//                return tempInstance
+//            }
+//            synchronized(this) {
+//                val instance
+//                        = Room.databaseBuilder(context.applicationContext,
+//                    MusicDatabase::class.java,
+//                    "indexed_library")
+//                    .addCallback(object: RoomDatabase.Callback() {
+//                        override fun onCreate(db: SupportSQLiteDatabase) {
+//                            super.onCreate(db)
+//                            INSTANCE?.let { db ->
+//                                val mso = MediaStoreOperations()
+//                                mso.populateSongsTable(context, db)
+//                                mso.populateAlbumsTable(context, db)
+//                                mso.populateArtistsTable(context, db)
+//                            }
+//                        }
+//                    })
+//                    .build()
+//                INSTANCE = instance
+//                return instance
+//            }
         }
     }
 

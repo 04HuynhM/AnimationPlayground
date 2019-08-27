@@ -9,9 +9,7 @@ import com.badap.ArtistEntity
 import com.badap.SongEntity
 import com.badap.database.AlbumDao
 import com.badap.database.ArtistDao
-import com.badap.database.MusicDatabase
 import com.badap.database.SongDao
-import java.lang.IllegalArgumentException
 
 class MediaStoreUtility {
 

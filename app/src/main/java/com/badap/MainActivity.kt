@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
+import com.badap.database.MusicDatabase
 import com.badap.fragments.MenuFragment
 import com.badap.utilities.GeneralUtility
 import com.badap.utilities.MediaStoreUtility
@@ -18,7 +19,6 @@ import com.github.hiteshsondhi88.libffmpeg.FFmpeg
 import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.io.*
 import java.util.*
 
 
@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         var indexedArtists: ArrayList<ArtistEntity>? = null
         var indexedAlbums: ArrayList<AlbumEntity>? = null
         var indexedSongs: ArrayList<SongEntity>? = null
-        var lastUpdated: Date? = null
         val mediaStoreUtil = MediaStoreUtility()
         val generalUtil = GeneralUtility()
     }
@@ -39,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setupPermissions()
         initializeFfmpeg()
+
+        val database = MusicDatabase.getInstance(this)
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.main_navigator)
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)

@@ -11,7 +11,7 @@ import com.badap.R
 import com.github.hiteshsondhi88.libffmpeg.ExecuteBinaryResponseHandler
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException
-import java.io.*
+import java.io.File
 
 
 class SongFragment : Fragment() {
@@ -84,19 +84,19 @@ class SongFragment : Fragment() {
 //                        .transition(DrawableTransitionOptions.withCrossFade())
 //                        .into(mImageView)
 
-                    val file = File(filePath)
-                    val size = file.length().toInt()
-                    val bytes = ByteArray(size)
-                    try {
-                        val buf = BufferedInputStream(FileInputStream(file))
-                        buf.read(bytes, 0, bytes.size)
-                        buf.close()
-                        processByteToWaveForm(bytes)
-                    } catch (e: FileNotFoundException) {
-                        e.printStackTrace()
-                    } catch (e: IOException) {
-                        e.printStackTrace()
-                    }
+//                    val file = File(filePath)
+//                    val size = file.length().toInt()
+//                    val bytes = ByteArray(size)
+//                    try {
+//                        val buf = BufferedInputStream(FileInputStream(file))
+//                        buf.read(bytes, 0, bytes.size)
+//                        buf.close()
+//                        processByteToWaveForm(bytes)
+//                    } catch (e: FileNotFoundException) {
+//                        e.printStackTrace()
+//                    } catch (e: IOException) {
+//                        e.printStackTrace()
+//                    }
                 }
             })
         } catch (e: FFmpegCommandAlreadyRunningException) {

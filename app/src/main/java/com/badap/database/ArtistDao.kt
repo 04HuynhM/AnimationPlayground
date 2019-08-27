@@ -2,6 +2,7 @@ package com.badap.database
 
 import androidx.room.*
 import com.badap.ArtistEntity
+import io.reactivex.Flowable
 
 @Dao
 interface ArtistDao {

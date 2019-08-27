@@ -9,17 +9,23 @@ import android.view.ViewGroup
 import android.widget.RadioGroup
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.badap.AlbumEntity
 import com.badap.MainActivity.Companion.mediaStoreUtil
 import com.badap.R
 import com.badap.adapters.AlbumRecyclerAdapter
+import com.badap.viewModels.AlbumViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 
 class AlbumsFragment : Fragment(){
 
     lateinit var adapter: AlbumRecyclerAdapter
     lateinit var prefs: SharedPreferences
+    private lateinit var albumViewModel: AlbumViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +40,15 @@ class AlbumsFragment : Fragment(){
 
         val bundle = arguments
         val artistId = bundle?.get("artistId") as Long
+        var albumListRx = ArrayList<AlbumEntity>()
+
+        albumViewModel = ViewModelProvider(this).get(AlbumViewModel::class.java)
+        albumViewModel.getAlbumList()
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                albumListRx = ArrayList(it)
+            }
 
         val layoutManager = GridLayoutManager(requireContext(), 12)
         val recyclerView = view.findViewById<RecyclerView>(R.id.albums_recycler)
